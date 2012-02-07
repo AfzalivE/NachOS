@@ -1,0 +1,33 @@
+#############################################################################
+# Machine-specific definitions
+#############################################################################
+
+osname = $(shell uname -s)
+osrelease = $(shell uname -r)
+
+hosttype = unknown
+
+# If it is SunOS 5.9 at our department server 
+ifeq ($(osname),SunOS)
+ifeq ($(osrelease),5.9)
+CPP = /usr/lib/cpp
+GCCDIR = /u1/cs3mh3/cross/crosssun/decstation-ultrix/bin/
+LDFLAGS = -T script -N
+ASFLAGS = -mips2
+CPPFLAGS = $(INCDIR)
+COFF2NOFF = ../../bin/coff2noff.sparcSolaris
+hosttype = sparcSolaris
+endif
+endif
+
+# If it is Linux at our department
+ifeq ($(osname),Linux)
+CPP = /usr/bin/cpp
+GCCDIR = /u1/cs3mh3/cross/crosslinux/decstation-ultrix/bin/
+LDFLAGS = -T script -N
+ASFLAGS = -mips2
+CPPFLAGS = $(INCDIR)
+COFF2NOFF = ../../bin/coff2noff.x86Linux
+hosttype = x86Linux
+endif
+

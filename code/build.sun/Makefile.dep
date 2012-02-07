@@ -1,0 +1,12 @@
+# SUN SPARC, Solaris 2.4
+HOSTCFLAGS = -DSPARC -DSOLARIS -DHOST_IS_BIG_ENDIAN
+CPP = /usr/ccs/lib/cpp
+CPP_AS_FLAGS = -D_ASM
+LDFLAGS = -lsocket -lnsl
+
+#---------------------------------------------------------------
+#
+# DO NOT DELETE THIS LINE -- make depend uses it!
+# DEPENDENCIES MUST END AT END OF FILE
+# IF YOU PUT STUFF HERE IT WILL GO AWAY
+# see make depend above
