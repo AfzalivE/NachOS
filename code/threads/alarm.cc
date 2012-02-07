@@ -53,3 +53,12 @@ Alarm::CallBack()
         interrupt->YieldOnReturn();
     }
 }
+
+void 
+Alarm::GoToSleepFor(int howLong) {
+	IntStatus oldLevel = kernel->interrupt->SetLevel(IntOff);
+	
+	
+}
+
+

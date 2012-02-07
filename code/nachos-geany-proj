@@ -18,7 +18,25 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=-1
+current_page=17
+FILE_NAME_0=2139;C++;0;16;1;1;0;/home/afzal/Class/CS3SH3/nachos-dev/code/threads/alarm.cc;0;4
+FILE_NAME_1=1177;C;0;16;1;1;0;/home/afzal/Class/CS3SH3/nachos-dev/code/threads/alarm.h;0;4
+FILE_NAME_2=5302;C++;0;16;1;1;0;/home/afzal/Class/CS3SH3/nachos-dev/code/threads/kernel.cc;0;4
+FILE_NAME_3=0;C;0;16;1;1;0;/home/afzal/Class/CS3SH3/nachos-dev/code/threads/kernel.h;0;4
+FILE_NAME_4=6629;C++;0;16;1;1;0;/home/afzal/Class/CS3SH3/nachos-dev/code/threads/main.cc;0;4
+FILE_NAME_5=0;C;0;16;1;1;0;/home/afzal/Class/CS3SH3/nachos-dev/code/threads/main.h;0;4
+FILE_NAME_6=4767;C++;0;16;1;1;0;/home/afzal/Class/CS3SH3/nachos-dev/code/threads/scheduler.cc;0;4
+FILE_NAME_7=0;C;0;16;1;1;0;/home/afzal/Class/CS3SH3/nachos-dev/code/threads/scheduler.h;0;4
+FILE_NAME_8=0;C;0;16;1;1;0;/home/afzal/Class/CS3SH3/nachos-dev/code/threads/switch.h;0;4
+FILE_NAME_9=0;None;0;16;1;1;0;/home/afzal/Class/CS3SH3/nachos-dev/code/threads/switch.s;0;4
+FILE_NAME_10=3169;C++;0;16;1;1;0;/home/afzal/Class/CS3SH3/nachos-dev/code/threads/synch.cc;0;4
+FILE_NAME_11=0;C;0;16;1;1;0;/home/afzal/Class/CS3SH3/nachos-dev/code/threads/synch.h;0;4
+FILE_NAME_12=0;C++;0;16;1;1;0;/home/afzal/Class/CS3SH3/nachos-dev/code/threads/synchlist.cc;0;4
+FILE_NAME_13=0;C;0;16;1;1;0;/home/afzal/Class/CS3SH3/nachos-dev/code/threads/synchlist.h;0;4
+FILE_NAME_14=15159;C++;0;16;1;1;0;/home/afzal/Class/CS3SH3/nachos-dev/code/threads/thread.cc;0;4
+FILE_NAME_15=613;C;0;16;1;1;0;/home/afzal/Class/CS3SH3/nachos-dev/code/threads/thread.h;0;4
+FILE_NAME_16=4223;C++;0;16;1;1;0;/home/afzal/Class/CS3SH3/nachos-dev/code/machine/interrupt.cc;0;4
+FILE_NAME_17=0;C++;0;16;1;1;0;/home/afzal/Class/CS3SH3/nachos-dev/code/machine/stats.cc;0;4
 
 [VTE]
 last_dir=/home/afzal
