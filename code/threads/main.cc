@@ -295,6 +295,8 @@ main(int argc, char **argv)
       }
     }
 
+	printf("test_afzal\r\n");
+
     // If we don't run a user program, we may get here.
     // Calling "return" would terminate the program.
     // Instead, call Halt, which will first clean up, then
