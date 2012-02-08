@@ -57,12 +57,9 @@ Alarm::CallBack()
 // Problem 1
 
 void 
-Alarm::GoToSleepFor(int howLong) 
-{
+Alarm::GoToSleepFor(int howLong) {
 	IntStatus oldLevel = kernel->interrupt->SetLevel(IntOff);
-	Thread* t = kernel->currentThread;
-
-	_bedroom.PutToBed(t, howLong);
+	
 	
 }
 
