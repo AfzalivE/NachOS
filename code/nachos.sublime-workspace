@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"Inte",
+				"Interrupt"
+			],
+			[
+				"Interru",
+				"interrupt"
+			],
+			[
 				"set",
 				"SetLevel"
 			],
@@ -15,15 +23,83 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "threads/alarm.cc",
+			"settings":
+			{
+				"buffer_size": 2160,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "threads/thread.cc",
+			"settings":
+			{
+				"buffer_size": 15873,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "threads/main.h",
+			"settings":
+			{
+				"buffer_size": 421,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "threads/alarm.h",
+			"settings":
+			{
+				"buffer_size": 1407,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 0.0,
+		"height": 375.0,
 		"selected_items":
 		[
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"soda",
+				"Themr: Soda Light"
+			],
+			[
+				"the",
+				"Themr: Soda Dark"
+			],
+			[
+				"",
+				"Themr: Soda Light"
+			],
+			[
+				"th",
+				"Themr: Soda Light"
+			],
+			[
+				"The",
+				"Themr: Soda Dark"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"Packa",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Discover Packages"
+			]
 		],
-		"width": 0.0
+		"width": 435.0
 	},
 	"console":
 	{
@@ -40,12 +116,20 @@
 	},
 	"file_history":
 	[
+		"/home/afzal/Class/CS3SH3/orz-nachos/nachos/threads/thread.cc",
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/machine/interrupt.cc",
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/machine/machine.cc",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/alarm.cc",
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/main.cc",
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/machine/disk.cc",
+		"/home/afzal/.config/sublime-text-2/Packages/User/Global.sublime-settings",
+		"/home/afzal/.config/sublime-text-2/Packages/User/Default (Linux).sublime-keymap",
+		"/home/afzal/.config/sublime-text-2/Packages/User/Package Control.sublime-settings",
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/scheduler.h",
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/scheduler.cc",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/alarm.h",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/nachos.sublime-project",
 		"/home/afzal/Class/CS3SH3/nachos-dev/nachos.sublime-project",
-		"/home/afzal/Class/CS3SH3/nachos-dev/code/machine/machine.cc",
-		"/home/afzal/Class/CS3SH3/nachos-dev/code/machine/interrupt.cc",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/thread.h",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/synchlist.h",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/thread.cc",
@@ -54,10 +138,7 @@
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/synch.cc",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/switch.s",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/switch.h",
-		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/scheduler.h",
-		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/scheduler.cc",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/main.h",
-		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/main.cc",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/kernel.h",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/kernel.cc"
 	],
@@ -94,6 +175,120 @@
 	"groups":
 	[
 		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "threads/alarm.cc",
+					"settings":
+					{
+						"buffer_size": 2160,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2153,
+								2153
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 672.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "threads/thread.cc",
+					"settings":
+					{
+						"buffer_size": 15873,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13557,
+								13557
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "threads/main.h",
+					"settings":
+					{
+						"buffer_size": 421,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "threads/alarm.h",
+					"settings":
+					{
+						"buffer_size": 1407,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
 			"sheets":
 			[
 			]
@@ -116,11 +311,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":
@@ -140,21 +342,29 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"ar",
+				"threads/alarm.cc"
+			]
 		],
 		"width": 0.0
 	},
 	"select_project":
 	{
-		"height": 0.0,
+		"height": 500.0,
 		"selected_items":
 		[
+			[
+				"",
+				"/home/afzal/Class/CS3SH3/nachos-dev/code/nachos.sublime-project"
+			]
 		],
-		"width": 0.0
+		"width": 380.0
 	},
-	"show_minimap": false,
+	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 204.0,
 	"status_bar_visible": true
 }
