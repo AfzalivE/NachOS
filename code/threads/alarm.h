@@ -29,7 +29,7 @@ class Alarm : public CallBackObj {
                                 // to "toCall" every time slice.
     ~Alarm() { delete timer; }
     
-    void WaitUntil(int x);      // suspend execution until time > now + x
+    void GoToSleepFor(int howLong);      // suspend execution until time > now + x
                                 // this method is not yet implemented
 
   private:

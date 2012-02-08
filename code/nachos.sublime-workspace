@@ -40,10 +40,12 @@
 	},
 	"file_history":
 	[
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/alarm.cc",
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/alarm.h",
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/nachos.sublime-project",
 		"/home/afzal/Class/CS3SH3/nachos-dev/nachos.sublime-project",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/machine/machine.cc",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/machine/interrupt.cc",
-		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/alarm.cc",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/thread.h",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/synchlist.h",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/thread.cc",
@@ -57,8 +59,7 @@
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/main.h",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/main.cc",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/kernel.h",
-		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/kernel.cc",
-		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/alarm.h"
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/kernel.cc"
 	],
 	"find":
 	{
