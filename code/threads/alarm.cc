@@ -52,15 +52,15 @@ Alarm::CallBack()
     if (status != IdleMode) {
         interrupt->YieldOnReturn();
     }
+
 }
 
 // Problem 1
 
 void 
 Alarm::GoToSleepFor(int howLong) {
-	IntStatus oldLevel = kernel->interrupt->SetLevel(IntOff);
-	
-	
+
+
 }
 
 

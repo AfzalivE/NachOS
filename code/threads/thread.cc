@@ -62,7 +62,7 @@ Thread::Thread(char* threadName)
 Thread::~Thread()
 {
     DEBUG(dbgThread, "Deleting thread: " << name);
-    printf("test2");
+
     ASSERT(this != kernel->currentThread);
     if (stack != NULL)
         DeallocBoundedArray((char *) stack, StackSize * sizeof(int));

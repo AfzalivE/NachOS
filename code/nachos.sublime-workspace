@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"ker",
+				"kernel"
+			],
+			[
+				"how",
+				"howLong"
+			],
+			[
+				"Inte",
+				"Interrupt"
+			],
+			[
+				"Interru",
+				"interrupt"
+			],
+			[
 				"set",
 				"SetLevel"
 			],
@@ -19,11 +35,55 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 0.0,
+		"height": 79.0,
 		"selected_items":
 		[
+			[
+				"subli",
+				"Preferences: SublimeClang Settings – User"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"soda",
+				"Themr: Soda Light"
+			],
+			[
+				"the",
+				"Themr: Soda Dark"
+			],
+			[
+				"",
+				"Themr: Soda Light"
+			],
+			[
+				"th",
+				"Themr: Soda Light"
+			],
+			[
+				"The",
+				"Themr: Soda Dark"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"Packa",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Discover Packages"
+			]
 		],
-		"width": 0.0
+		"width": 435.0
 	},
 	"console":
 	{
@@ -40,24 +100,37 @@
 	},
 	"file_history":
 	[
+		"/home/afzal/.config/sublime-text-2/Packages/SublimeClang/SublimeClang.sublime-settings",
+		"/home/afzal/.config/sublime-text-2/Packages/User/SublimeClang.sublime-settings",
+		"/usr/include/c++/4.4/cstddef",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/alarm.cc",
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/machine/console.cc",
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/lib/sysdep.h",
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/main.h",
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/machine/timer.cc",
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/lib/copyright.h",
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/machine/console.h",
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/scheduler.cc",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/alarm.h",
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/thread.cc",
+		"/home/afzal/Class/CS3SH3/orz-nachos/nachos/threads/thread.cc",
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/machine/interrupt.cc",
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/machine/machine.cc",
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/main.cc",
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/machine/disk.cc",
+		"/home/afzal/.config/sublime-text-2/Packages/User/Global.sublime-settings",
+		"/home/afzal/.config/sublime-text-2/Packages/User/Default (Linux).sublime-keymap",
+		"/home/afzal/.config/sublime-text-2/Packages/User/Package Control.sublime-settings",
+		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/scheduler.h",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/nachos.sublime-project",
 		"/home/afzal/Class/CS3SH3/nachos-dev/nachos.sublime-project",
-		"/home/afzal/Class/CS3SH3/nachos-dev/code/machine/machine.cc",
-		"/home/afzal/Class/CS3SH3/nachos-dev/code/machine/interrupt.cc",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/thread.h",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/synchlist.h",
-		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/thread.cc",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/synchlist.cc",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/synch.h",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/synch.cc",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/switch.s",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/switch.h",
-		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/scheduler.h",
-		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/scheduler.cc",
-		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/main.h",
-		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/main.cc",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/kernel.h",
 		"/home/afzal/Class/CS3SH3/nachos-dev/code/threads/kernel.cc"
 	],
@@ -130,6 +203,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.clang":
+	{
+		"height": 104.0
+	},
 	"replace":
 	{
 		"height": 0.0
@@ -140,21 +217,29 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"ar",
+				"threads/alarm.cc"
+			]
 		],
 		"width": 0.0
 	},
 	"select_project":
 	{
-		"height": 0.0,
+		"height": 500.0,
 		"selected_items":
 		[
+			[
+				"",
+				"/home/afzal/Class/CS3SH3/nachos-dev/code/nachos.sublime-project"
+			]
 		],
-		"width": 0.0
+		"width": 380.0
 	},
-	"show_minimap": false,
+	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 204.0,
 	"status_bar_visible": true
 }
