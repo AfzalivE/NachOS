@@ -1,14 +1,14 @@
 // alarm.h 
-//      Data structures for a software alarm clock.
+//	Data structures for a software alarm clock.
 //
-//      We make use of a hardware timer device, that generates
-//      an interrupt every X time ticks (on real systems, X is
-//      usually between 0.25 - 10 milliseconds).
+//	We make use of a hardware timer device, that generates
+//	an interrupt every X time ticks (on real systems, X is
+//	usually between 0.25 - 10 milliseconds).
 //
-//      From this, we provide the ability for a thread to be
-//      woken up after a delay; we also provide time-slicing.
+//	From this, we provide the ability for a thread to be
+//	woken up after a delay; we also provide time-slicing.
 //
-//      NOTE: this abstraction is not completely implemented.
+//	NOTE: this abstraction is not completely implemented.
 //
 // Copyright (c) 1992-1996 The Regents of the University of California.
 // All rights reserved.  See copyright.h for copyright notice and limitation 
@@ -25,18 +25,26 @@
 // The following class defines a software alarm clock. 
 class Alarm : public CallBackObj {
   public:
-    Alarm(bool doRandomYield);  // Initialize the timer, and callback 
-                                // to "toCall" every time slice.
+    Alarm(bool doRandomYield);	// Initialize the timer, and callback 
+				// to "toCall" every time slice.
     ~Alarm() { delete timer; }
     
-    void GoToSleepFor(int howLong);      // suspend execution until time > now + x
-                                // this method is not yet implemented
+    void WaitUntil(int x);	// suspend execution until time > now + x
+	void GoToSleepFor(int howLong);
 
+	struct Threadstruct
+	{
+	Thread *thread1;
+	Interrupt *interrupt1;
+	}vector<Threadstruct> interruptedthreads; //Whenever call back occurs, compare time to see to check ur vector to see if any thread should wake up
+	
+	
   private:
-    Timer *timer;               // the hardware timer device
+  
+    Timer *timer;		// the hardware timer device
 
-    void CallBack();            // called when the hardware
-                                // timer generates an interrupt
+    void CallBack();		// called when the hardware
+				// timer generates an interrupt
 };
 
 #endif // ALARM_H
