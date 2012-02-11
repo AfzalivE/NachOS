@@ -21,6 +21,8 @@
 #include "utility.h"
 #include "callback.h"
 #include "timer.h"
+#include "thread.h"
+#include "interrupt.h"
 #include <vector.h>
 
 // The following class defines a software alarm clock. 
@@ -37,7 +39,8 @@ class Alarm : public CallBackObj {
 	{
 	Thread *thread1;
 	Interrupt *interrupt1;
-	}vector<Threadstruct> interruptedthreads; //Whenever call back occurs, compare time to see to check ur vector to see if any thread should wake up
+	}
+	vector<Threadstruct> interruptedthreads; //Whenever call back occurs, compare time to see to check ur vector to see if any thread should wake up
 	
 	
   private:
