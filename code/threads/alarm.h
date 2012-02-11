@@ -37,7 +37,7 @@ class Alarm : public CallBackObj {
 	{
 	Thread *thread1;
 	Interrupt *interrupt1;
-	}
+	};
 	vector<Threadstruct> interruptedthreads; //Whenever call back occurs, compare time to see to check ur vector to see if any thread should wake up
 	
 	
