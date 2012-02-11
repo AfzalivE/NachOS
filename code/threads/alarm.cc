@@ -66,7 +66,7 @@ Alarm::GoToSleepFor(int howLong)
 {
 	Threadstruct temp;
 	temp.thread1 = kernel->currentThread;
-	temp.interrupt1->Schedule(scheduler->ReadyToRun(temp.thread1), howLong, TimerInt);
+	temp.interrupt1->Schedule(Scheduler->ReadyToRun(temp.thread1), howLong, TimerInt);
 	interruptedthreads.push_back(temp);
 	currentThread->Sleep();
 }

@@ -24,6 +24,7 @@
 #include "vector.h"
 #include "thread.h"
 #include "interrupt.h"
+#include "scheduler.h"
 
 // The following class defines a software alarm clock. 
 class Alarm : public CallBackObj {
