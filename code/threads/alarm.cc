@@ -53,15 +53,15 @@ Alarm::CallBack()
     MachineStatus status = interrupt->getStatus();
     
     if (status != IdleMode) {	// is it time to quit?
-    //     if (!kernel->interrupt->AnyFutureInterrupts()) {
-	   //  timer->Disable();	// turn off the timer
-    // } else {			// there's someone to preempt
-	interrupt->YieldOnReturn();
+	   interrupt->YieldOnReturn();
     }
-}
 
-static void returnRTR(Thread* t) {
-    kernel->scheduler->ReadyToRun(t);
+    if (interruptedthreads.back()->time > kernel->stats->totalTicks) {
+        interrupt->Enable();
+        kernel->scheduler->ReadyToRun(Thread *thread);
+        interruptedthreads.pop_back();
+        interrupt->Disable();
+    }
 }
 
 void
@@ -69,8 +69,25 @@ Alarm::GoToSleepFor(int howLong)
 {
 	Threadstruct temp;
 	temp.thread1 = kernel->currentThread;
+    temp.time = kernel->stats->totalTicks + howLong;
 
-	kernel->interrupt->Schedule(returnRTR(temp.thread1), howLong, TimerInt);
-	interruptedthreads.push_back(temp);
-	kernel->currentThread->Sleep(true);
+    
+    // sort by time descending
+    
+    interruptedthreads.push_back(temp);
+    
+    int i, j, newValue;
+
+    for (i = 1; i < interruptedthreads.size(); i++) {
+        newValue = interruptedthreads.at(i);
+        j = i;
+        while (j > 0 && interruptedthreads[j - 1] > newValue) {
+              interruptedthreads[j] = interruptedthreads[j - 1];
+              j--;
+        }
+        interruptedthreads[j] = newValue;
+    }
+
+
+    kernel->currentThread->Sleep(true);
 }

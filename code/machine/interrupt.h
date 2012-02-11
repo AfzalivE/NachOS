@@ -84,6 +84,9 @@ class Interrupt {
                                // and return previous setting.
     void Enable() { (void) SetLevel(IntOn); }
                                // Enable interrupts.
+    // Custom Disable method (opposite of Enable())
+    void Disable() {(void) SetLevel(IntOff); } 
+
     IntStatus getLevel() {return level;}
                                // Return whether interrupts
                                // are enabled or disabled
