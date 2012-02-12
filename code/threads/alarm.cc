@@ -75,7 +75,7 @@ Alarm::CallBack()
     }
     
     if (!threadlist->IsEmpty()) {
-        if ((threadlist->Front()->waketime >= kernel->stats->totalTicks)) {
+        if ((threadlist->Front()->waketime <= kernel->stats->totalTicks)) {
             IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
             kernel->scheduler->ReadyToRun(threadlist->RemoveFront());
             (void) kernel->interrupt->SetLevel(oldlevel);
