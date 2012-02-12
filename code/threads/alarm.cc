@@ -79,7 +79,7 @@ Alarm::GoToSleepFor(int howLong)
     }
 
     int i, j;
-    DEBUG("myBug", "----------making temp thread");
+    printf("%s\n", "----------making temp thread");
     Threadstruct newValue;
 
     for (i = 1; i < interruptedthreads.size(); i++) {
