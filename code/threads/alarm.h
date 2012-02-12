@@ -31,12 +31,14 @@ class Alarm : public CallBackObj {
     Alarm(bool doRandomYield);	// Initialize the timer, and callback 
 				// to "toCall" every time slice.
     ~Alarm() { delete timer; }
+
+   SortedList<Thread*> *threadlist;
+    
     
   private:
   
    Timer *timer;       // the hardware timer device
 
-   SortedList<Thread*> *threadlist;
  
    void GoToSleepFor(int howLong); // suspend execution until time > now + x 
 
