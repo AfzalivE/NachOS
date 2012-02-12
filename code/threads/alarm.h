@@ -37,7 +37,7 @@ class Alarm : public CallBackObj {
         Thread* thread1;
         int time;
     };
-    static int Alarm::Compare(Threadstruct x, Threadstruct y) {
+    static int Compare(Threadstruct x, Threadstruct y) {
         if (x.time < y.time) {
             return -1;
         } else if (x.time == y.time) {
@@ -45,8 +45,8 @@ class Alarm : public CallBackObj {
         } else {
             return 1;
         }
-    }
-}    SortedList<Threadstruct> *threadlist;
+    };
+    SortedList<Threadstruct> *threadlist;
 
   private:
   
