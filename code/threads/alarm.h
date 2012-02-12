@@ -34,7 +34,7 @@ class Alarm : public CallBackObj {
     
 	void GoToSleepFor(int howLong); // suspend execution until time > now + x 
 
-    SortedList<Thread> *threadlist;
+    SortedList<Thread*> *threadlist;
 
   private:
   
