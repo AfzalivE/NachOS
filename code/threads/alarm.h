@@ -32,15 +32,14 @@ class Alarm : public CallBackObj {
 				// to "toCall" every time slice.
     ~Alarm() { delete timer; }
 
+   void GoToSleepFor(int howLong); // suspend execution until time > now + x 
+
    SortedList<Thread*> *threadlist;
     
     
   private:
   
-   Timer *timer;       // the hardware timer device
-
- 
-   void GoToSleepFor(int howLong); // suspend execution until time > now + x 
+   Timer *timer;       // the hardware timer device 
 
    void CallBack();		// called when the hardware
 				// timer generates an interrupt
