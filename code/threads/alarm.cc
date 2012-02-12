@@ -56,12 +56,12 @@ Alarm::CallBack()
 	   interrupt->YieldOnReturn();
     }
 
-    if ((interruptedthreads.back().time) > (kernel->stats->totalTicks)) {
-//        interrupt->Enable();
-        kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
-        interruptedthreads.pop_back();
-//        interrupt->Disable();
-    }
+//     if ((interruptedthreads.back().time) > (kernel->stats->totalTicks)) {
+// //        interrupt->Enable();
+//         kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
+//         interruptedthreads.pop_back();
+// //        interrupt->Disable();
+//     }
 }
 
 void
@@ -89,10 +89,6 @@ Alarm::GoToSleepFor(int howLong)
               j--;
         }
         interruptedthreads[j] = newValue;
-    }
-
-    for (int i = 0; i < interruptedthreads.size(); i++) {
-        printf("%i\r\n", interruptedthreads.at(i).time);
     }
 
     kernel->interrupt->Disable();
