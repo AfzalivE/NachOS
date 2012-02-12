@@ -214,7 +214,8 @@ void Lock::Release()
 Condition::Condition(char* debugName)
 {
     name = debugName;
-    waitQueue = new List<Semaphore *>;
+    // waitQueue = new List<Semaphore *>;
+    waitQueue = new List<Thread *>;
 }
 
 //----------------------------------------------------------------------
