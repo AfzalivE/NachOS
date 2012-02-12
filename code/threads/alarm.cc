@@ -86,22 +86,22 @@ Alarm::GoToSleepFor(int howLong)
 
     
     
-    if (interruptedthreads.empty()) {
-        interruptedthreads.push_back(temp);
+    if (interruptedthreads->empty()) {
+        interruptedthreads->push_back(temp);
     }
 
     int i, j;
     Threadstruct newValue;
 
     // sort by time descending
-    for (i = 1; i < interruptedthreads.size(); i++) {
-        newValue = interruptedthreads.at(i);
+    for (i = 1; i < interruptedthreads->size(); i++) {
+        newValue = interruptedthreads->at(i);
         j = i;
-        while (j > 0 && interruptedthreads.at(j - 1).time > newValue.time) {
-              interruptedthreads[j] = interruptedthreads[j - 1];
+        while (j > 0 && interruptedthreads->at(j - 1).time > newValue.time) {
+              interruptedthreads->at(j) = interruptedthreads->at(j - 1);
               j--;
         }
-        interruptedthreads[j] = newValue;
+        interruptedthreads->at(j) = newValue;
     }
 
     kernel->interrupt->Disable();
