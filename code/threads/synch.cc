@@ -244,16 +244,28 @@ Condition::~Condition()
 
 void Condition::Wait(Lock* conditionLock) 
 {
-     Semaphore *waiter;
+     // Semaphore *waiter;
+
+    Interrupt *interrupt = kernel->interrupt;
+    Thread *currentThread = kernel->currentThread;
     
      ASSERT(conditionLock->IsHeldByCurrentThread());
 
-     waiter = new Semaphore("condition", 0);
-     waitQueue->Append(waiter);
+     // waiter = new Semaphore("condition", 0);
+     // waitQueue->Append(waiter);
+
+     IntStatus oldLevel = interrupt->SetLevel(IntOff);
+     waitQueue->Append(currentThread);
+
+
      conditionLock->Release();
-     waiter->P();
+     // waiter->P();
+     kernel->scheduler->ReadyToRun(waitQueue->RemoveFront());
+
+     (void) interrupt->SetLevel(oldLevel);
+
      conditionLock->Acquire();
-     delete waiter;
+     // delete waiter;
 }
 
 //----------------------------------------------------------------------
@@ -273,13 +285,22 @@ void Condition::Wait(Lock* conditionLock)
 
 void Condition::Signal(Lock* conditionLock)
 {
-    Semaphore *waiter;
+    Interrupt *interrupt = kernel->interrupt;
+    Thread *currentThread = kernel->currentThread;
+
+    // Semaphore *waiter;
     
     ASSERT(conditionLock->IsHeldByCurrentThread());
     
     if (!waitQueue->IsEmpty()) {
-        waiter = waitQueue->RemoveFront();
-        waiter->V();
+        // waiter = waitQueue->RemoveFront();
+        // waiter->V();
+
+        IntStatus oldLevel = interrupt->SetLevel(IntOff);
+
+        kernel->scheduler->ReadyToRun(waitQueue->RemoveFront());
+
+        (void) interrupt->SetLevel(oldLevel);
     }
 }
 
