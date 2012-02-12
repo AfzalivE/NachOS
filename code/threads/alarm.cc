@@ -64,8 +64,8 @@ Alarm::CallBack()
     if ((interruptedthreads.back().time >= kernel->stats->totalTicks)) {
         IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
         kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
-        (void) kernel->interrupt->SetLevel(oldlevel);
         interruptedthreads.pop_back();
+        (void) kernel->interrupt->SetLevel(oldlevel);
     }
 }
 
@@ -76,6 +76,8 @@ Alarm::CallBack()
 void
 Alarm::GoToSleepFor(int howLong)
 {
+    DEBUG(dbgThread, "Entering Alarm::GoToSleepFor");
+
 	Threadstruct temp;
 	temp.thread1 = kernel->currentThread;
     temp.time = kernel->stats->totalTicks + howLong;
