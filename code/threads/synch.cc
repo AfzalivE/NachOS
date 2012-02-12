@@ -257,15 +257,16 @@ void Condition::Wait(Lock* conditionLock)
 
      waitQueue->Append(currentThread);
 
-
+     IntStatus oldLevel = interrupt->SetLevel(IntOff);
+     
      conditionLock->Release();
      // waiter->P();
-     IntStatus oldLevel = interrupt->SetLevel(IntOff);
+
      kernel->scheduler->ReadyToRun(waitQueue->RemoveFront());
 
-     (void) interrupt->SetLevel(oldLevel);
-
      conditionLock->Acquire();
+
+     (void) interrupt->SetLevel(oldLevel);
      // delete waiter;
 }
 
