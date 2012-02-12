@@ -92,7 +92,7 @@ Alarm::GoToSleepFor(int howLong)
     }
 
     for (int i = 0; i < interruptedthreads.size(); i++) {
-        printf("%i\n", interruptedthreads.at(i).time);
+        printf("%i\r\n", interruptedthreads.at(i).time);
     }
 
     kernel->interrupt->Disable();
