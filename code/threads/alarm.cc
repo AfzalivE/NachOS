@@ -24,7 +24,6 @@
 Alarm::Alarm(bool doRandom)
 {
     timer = new Timer(doRandom, this);
-    SortedList<Threadstruct> *testlist = new SortedList<Threadstruct>(Compare);
     threadlist = new SortedList<Threadstruct>(Compare);
 }
 

@@ -40,6 +40,8 @@ class Alarm : public CallBackObj {
     static int Compare(Threadstruct x, Threadstruct y) {
         if (x.time < y.time) {
             return -1;
+        } else if (x.time == y.time) {
+            return 0;
         } else {
             return 1;
         }
