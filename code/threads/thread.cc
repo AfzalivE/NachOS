@@ -38,7 +38,7 @@ Thread::Thread(char* threadName)
     name = threadName;
     stackTop = NULL;
     stack = NULL;
-    waketime = NULL;
+    waketime = 0;
     status = JUST_CREATED;
     for (int i = 0; i < MachineStateSize; i++) {
         machineState[i] = NULL;         // not strictly necessary, since
