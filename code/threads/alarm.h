@@ -22,8 +22,8 @@
 #include "callback.h"
 #include "timer.h"
 //#include "vector.h"
-#include "thread.h"
 #include "list.h"
+#include "thread.h"
 
 // The following class defines a software alarm clock. 
 class Alarm : public CallBackObj {
@@ -38,7 +38,7 @@ class Alarm : public CallBackObj {
                 int time;
     };
     int Compare (Threadstruct x, Threadstruct y);
-    SortedList<Threadstruct> threadlist;
+    SortedList<Threadstruct> *threadlist;
 
   private:
   
