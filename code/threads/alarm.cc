@@ -25,6 +25,7 @@
 Alarm::Alarm(bool doRandom)
 {
     timer = new Timer(doRandom, this);
+    threadlist = new SortedList<Threadstruct>(Compare);
 }
 
 static int Alarm::compare(Threadstruct x, Threadstruct y) {
@@ -53,6 +54,7 @@ static int Alarm::compare(Threadstruct x, Threadstruct y) {
 //	nothing on the ready list, and there are no other pending
 //	interrupts.  In this case, we can safely halt.
 //----------------------------------------------------------------------
+
 
 void 
 Alarm::CallBack() 
