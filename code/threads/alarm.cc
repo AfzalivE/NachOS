@@ -57,15 +57,15 @@ Alarm::CallBack()
     Interrupt *interrupt = kernel->interrupt;
     MachineStatus status = interrupt->getStatus();
     
-    if (status != IdleMode) {	// is it time to quit?
-	   interrupt->YieldOnReturn();
-    }
-
     if ((interruptedthreads.back().time >= kernel->stats->totalTicks)) {
         IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
         kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
         interruptedthreads.pop_back();
         (void) kernel->interrupt->SetLevel(oldlevel);
+    }
+    
+    if (status != IdleMode) {	// is it time to quit?
+	   interrupt->YieldOnReturn();
     }
 }
 
