@@ -97,6 +97,11 @@ class SortedList : public List<T> {
 
     void Insert(T item);       // insert an item onto the list in sorted order
 
+    unsigned int NumInList() { return numInList;};
+                               // how many items in the list?
+    bool IsEmpty() { return (numInList == 0); };
+                               // is the list empty? 
+
     void SanityCheck() const;  // has this list been corrupted?
     void SelfTest(T *p, int numEntries);
                                // verify module is working
@@ -109,6 +114,8 @@ class SortedList : public List<T> {
                                // in a sorted list
     void Append(T item) { Insert(item); }   
                                // neither does *ap*pend 
+protected:
+    int numInList;             // number of elements in list
 
 };
 
