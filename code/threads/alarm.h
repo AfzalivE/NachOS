@@ -37,7 +37,7 @@ class Alarm : public CallBackObj {
         Thread* thread1;
         int time;
     };
-    int Compare (Threadstruct x, Threadstruct y);
+    static int Compare (Threadstruct x, Threadstruct y);
     SortedList<Threadstruct> *threadlist;
 
   private:
