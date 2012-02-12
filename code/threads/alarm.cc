@@ -11,17 +11,16 @@
 #include "copyright.h"
 #include "alarm.h"
 #include "main.h"
-
 #include "list.h"
 
 static int 
-IntCompare(int x, int y) {
-    if (x < y) return -1;
-    else if (x == y) return 0;
+IntCompare(Threadstruct x, Threadstruct y) {
+    if (x.time < y.time) return -1;
+    else if (x.time == y.time) return 0;
     else return 1;
 }
 
-SortedList<Threadstruct> *interruptedthreads = new SortedList<int>(IntCompare);
+SortedList<Threadstruct> *interruptedthreads = new SortedList<Threadstruct>(ThreadCompare);
 
 //----------------------------------------------------------------------
 // Alarm::Alarm
