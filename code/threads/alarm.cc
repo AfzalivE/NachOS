@@ -70,7 +70,8 @@ Alarm::CallBack()
     Interrupt *interrupt = kernel->interrupt;
     MachineStatus status = interrupt->getStatus();
     
-    if ((threadlist->Front().waketime >= kernel->stats->totalTicks)) {
+    int wtime = threadlist->Front()->waketime;
+    if ((wtime >= kernel->stats->totalTicks)) {
         IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
         kernel->scheduler->ReadyToRun(threadlist->Front());
         (void) threadlist->RemoveFront();
