@@ -70,7 +70,7 @@ Alarm::CallBack()
     Interrupt *interrupt = kernel->interrupt;
     MachineStatus status = interrupt->getStatus();
     
-    int wtime = threadlist->Front()->waketime;
+    int wtime = &threadlist->Front()->waketime;
     if ((wtime >= kernel->stats->totalTicks)) {
         IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
         kernel->scheduler->ReadyToRun(threadlist->Front());
