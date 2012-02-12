@@ -116,6 +116,7 @@ class Thread {
                                         // stack)
     ThreadStatus status;                // ready, running or blocked
     char* name;
+    int* waketime;                      // Time to wake
 
     void StackAllocate(VoidFunctionPtr func, void *arg);
                                         // Allocate a stack for thread.

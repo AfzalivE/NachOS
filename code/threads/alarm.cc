@@ -14,10 +14,11 @@
 #include "list.h"
 
 
-static int Compare(Threadstruct x, Threadstruct y) {
-    if (x.time < y.time) {
+static int Compare(Thread* x, Thread* y) {
+
+    if (x->waketime < y->waketime) {
         return -1;
-    } else if (x.time == y.time) {
+    } else if (x->waketime == y->waketime) {
         return 0;
     } else {
         return 1;
@@ -35,7 +36,7 @@ static int Compare(Threadstruct x, Threadstruct y) {
 Alarm::Alarm(bool doRandom)
 {
     timer = new Timer(doRandom, this);
-    threadlist = new SortedList<Threadstruct>(Compare);
+    threadlist = new SortedList<Thread>(Compare);
 }
 
 //----------------------------------------------------------------------
@@ -93,18 +94,18 @@ Alarm::CallBack()
 //
 //----------------------------------------------------------------------
 
-void Alarm::PrintAll (Threadstruct t) {
-	DEBUG(dbgThread, t.time);
-}
+// void Alarm::PrintAll (Thread* t) {
+// 	DEBUG(dbgThread, timer.);
+// }
 
 void
-Alarm::GoToSleepFor(int howLong)
-{
+Alarm::GoToSleepFor(int howLong) {
+    
     DEBUG(dbgThread, "Entering Alarm::GoToSleepFor");
 
-	Threadstruct temp;
-	temp.thread1 = kernel->currentThread;
-    temp.time = kernel->stats->totalTicks + howLong;
+    Thread t;
+    t = kernel->currentThread;
+    t->waketime = kernel->stats->totalTicks + howLong;
   
 
     threadlist->Insert(temp);
