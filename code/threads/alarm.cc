@@ -56,9 +56,9 @@ Alarm::CallBack()
 	   interrupt->YieldOnReturn();
     }
 
-    if (interruptedthreads.back()->time > kernel->stats->totalTicks) {
+    if ((interruptedthreads.back().time) > (kernel->stats->totalTicks)) {
         interrupt->Enable();
-        kernel->scheduler->ReadyToRun(Thread *thread);
+        kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
         interruptedthreads.pop_back();
         interrupt->Disable();
     }
@@ -74,14 +74,17 @@ Alarm::GoToSleepFor(int howLong)
     
     // sort by time descending
     
-    interruptedthreads.push_back(temp);
-    
-    int i, j, newValue;
+    if (interruptedthreads.empty()) {
+        interruptedthreads.push_back(temp);
+    }
+
+    int i, j;
+    Thread newValue;
 
     for (i = 1; i < interruptedthreads.size(); i++) {
         newValue = interruptedthreads.at(i);
         j = i;
-        while (j > 0 && interruptedthreads[j - 1] > newValue) {
+        while (j > 0 && interruptedthreads[j - 1].time > newValue.time) {
               interruptedthreads[j] = interruptedthreads[j - 1];
               j--;
         }
