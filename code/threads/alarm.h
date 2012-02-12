@@ -33,13 +33,9 @@ class Alarm : public CallBackObj {
     
 	void GoToSleepFor(int howLong); // suspend execution until time > now + x
 
-
-	
-	
   private:
   
     Timer *timer;		// the hardware timer device
-
 
 	struct Threadstruct
 	{
@@ -48,8 +44,6 @@ class Alarm : public CallBackObj {
 	};
 
 	vector<Threadstruct> interruptedthreads; //Whenever call back occurs, compare time to see to check ur vector to see if any thread should wake up
-
-	static int Alarm::IntCompare(int x, int y);
 
     void CallBack();		// called when the hardware
 				// timer generates an interrupt

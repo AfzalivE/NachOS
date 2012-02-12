@@ -11,8 +11,8 @@
 #include "copyright.h"
 #include "alarm.h"
 #include "main.h"
-#include "list.h"
 
+#include "list.h"
 
 //----------------------------------------------------------------------
 // Alarm::Alarm
@@ -58,18 +58,10 @@ Alarm::CallBack()
 	   interrupt->YieldOnReturn();
     }
 
-
-    for (int i = 0; i < interruptedthreads.size(); i++){
-        if ((interruptedthreads.back().time > kernel->stats->totalTicks)) {
-            kernel->scheduler->ReadyToRun(interruptedthreads.at(i).thread1);
-            interruptedthreads.pop_back();           
-        }
+    if ((interruptedthreads.back().time > kernel->stats->totalTicks)) {
+        kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
+        interruptedthreads.pop_back();
     }
-
-    // if ((interruptedthreads.back().time > kernel->stats->totalTicks)) {
-    //     kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
-    //     interruptedthreads.pop_back();
-    // }
 }
 
 //----------------------------------------------------------------------
@@ -82,8 +74,24 @@ Alarm::GoToSleepFor(int howLong)
 	Threadstruct temp;
 	temp.thread1 = kernel->currentThread;
     temp.time = kernel->stats->totalTicks + howLong;
+  
+    if (interruptedthreads.empty()) {
+        interruptedthreads.push_back(temp);
+    }
 
-    interruptedthreads.push_back(temp);
+    int i, j;
+    Threadstruct newValue;
+
+    // sort by time descending
+    for (i = 1; i < interruptedthreads.size(); i++) {
+        newValue = interruptedthreads.at(i);
+        j = i;
+        while (j > 0 && interruptedthreads.at(j - 1).time > newValue.time) {
+              interruptedthreads.at(j) = interruptedthreads.at(j - 1);
+              j--;
+        }
+        interruptedthreads.at(j) = newValue;
+    }
 
     IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
     kernel->currentThread->Sleep(true);
