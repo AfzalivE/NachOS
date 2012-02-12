@@ -11,6 +11,7 @@
 #include "copyright.h"
 #include "alarm.h"
 #include "main.h"
+#include "list.h"
 
 //----------------------------------------------------------------------
 // Alarm::Alarm
@@ -29,7 +30,7 @@ int Alarm::Compare(Threadstruct x, Threadstruct y) {
 Alarm::Alarm(bool doRandom)
 {
     timer = new Timer(doRandom, this);
-    threadlist = new SortedList(Compare);
+    threadlist = new SortedList<Threadstruct>(Compare);
 }
 
 //----------------------------------------------------------------------
