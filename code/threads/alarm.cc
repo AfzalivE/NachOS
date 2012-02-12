@@ -109,7 +109,7 @@ Alarm::GoToSleepFor(int howLong)
 
 
 
-    int i = 0; i < threadlist.Apply(PrintAll);
+//    int i = 0; i < threadlist.Apply(PrintAll);
 
     IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
     kernel->currentThread->Sleep(false);
