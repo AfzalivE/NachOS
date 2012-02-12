@@ -91,6 +91,6 @@ Alarm::GoToSleepFor(int howLong)
         interruptedthreads[j] = newValue;
     }
 
-
+    kernel->interrupt->Disable();
     kernel->currentThread->Sleep(true);
 }
