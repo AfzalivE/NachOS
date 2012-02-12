@@ -71,10 +71,10 @@ Alarm::CallBack()
     //     kernel->scheduler->ReadyToRun(interruptedthreads.back.thread1);
     // } 
 
-    // if ((interruptedthreads.back().time) > (kernel->stats->totalTicks)) {
-    //     kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
-    //     interruptedthreads.pop_back();
-    // }
+    if ((interruptedthreads->back().time > kernel->stats->totalTicks)) {
+        kernel->scheduler->ReadyToRun(interruptedthreads->back().thread1);
+        interruptedthreads->pop_back();
+    }
 }
 
 void
