@@ -71,10 +71,9 @@ Alarm::CallBack()
     MachineStatus status = interrupt->getStatus();
 
     if (!threadlist->IsEmpty()) {
-        if ((threadlist->Front()->waketime > kernel->stats->totalTicks)) {
+        if ((threadlist->Front()->waketime >= kernel->stats->totalTicks)) {
             IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
             kernel->scheduler->ReadyToRun(threadlist->RemoveFront());
-            // (void) threadlist->RemoveFront();
             (void) kernel->interrupt->SetLevel(oldlevel);
         }
     }
@@ -109,16 +108,7 @@ Alarm::GoToSleepFor(int howLong) {
     temp = kernel->currentThread;
     temp->waketime = kernel->stats->totalTicks + howLong;
   
-
-    threadlist->Insert(temp);
-//    interruptedthreads.push_back(temp);
-    
-
-    // sort by time descending, smaller time at the end
-
-
-
-//    int i = 0; i < threadlist.Apply(PrintAll);
+    threadlist->Insert(temp);    
 
     IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
     kernel->currentThread->Sleep(false);
