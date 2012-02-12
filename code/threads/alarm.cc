@@ -63,7 +63,7 @@ Alarm::CallBack()
         interruptedthreads.pop_back();
         (void) kernel->interrupt->SetLevel(oldlevel);
     }
-    
+
     if (status != IdleMode) {	// is it time to quit?
 	   interrupt->YieldOnReturn();
     }
@@ -82,9 +82,9 @@ Alarm::GoToSleepFor(int howLong)
 	temp.thread1 = kernel->currentThread;
     temp.time = kernel->stats->totalTicks + howLong;
   
-    if (interruptedthreads.empty()) {
-        interruptedthreads.push_back(temp);
-    }
+    
+    interruptedthreads.push_back(temp);
+    
 
     int i, j;
     Threadstruct newValue;
