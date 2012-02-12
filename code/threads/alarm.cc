@@ -81,14 +81,6 @@ Alarm::CallBack()
             (void) kernel->interrupt->SetLevel(oldlevel);
         }
     }
-    
-
-//    if ((interruptedthreads.back().time >= kernel->stats->totalTicks)) {
-//        IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
-//        kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
-//        interruptedthreads.pop_back();
-//        (void) kernel->interrupt->SetLevel(oldlevel);
-//    }
 
 }
 
@@ -112,7 +104,7 @@ Alarm::GoToSleepFor(int howLong) {
   
     threadlist->Insert(temp);    
 
-    IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
+    // IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
     kernel->currentThread->Sleep(false);
-    (void) kernel->interrupt->SetLevel(oldlevel);
+    // (void) kernel->interrupt->SetLevel(oldlevel);
 }
