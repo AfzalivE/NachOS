@@ -21,7 +21,7 @@ IntCompare(int x, int y) {
     else return 1;
 }
 
-// SortedList<Threadstruct> interruptedthreads = new SortedList<int>(IntCompare);
+SortedList<Threadstruct> *interruptedthreads = new SortedList<int>(IntCompare);
 
 //----------------------------------------------------------------------
 // Alarm::Alarm
@@ -67,14 +67,15 @@ Alarm::CallBack()
 	   interrupt->YieldOnReturn();
     }
 
-    // if (interruptedthreads.Front.time > kernel->stats->totalTicks) {
-    //     kernel->scheduler->ReadyToRun(interruptedthreads.back.thread1);
-    // } 
+    if (interruptedthreads->Front->time > kernel->stats->totalTicks) {
+        kernel->scheduler->ReadyToRun(interruptedthreads->Front->thread1);
+        interruptedthreads->RemoveFront();
+    } 
 
-    if ((interruptedthreads.back().time > kernel->stats->totalTicks)) {
-        kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
-        interruptedthreads.pop_back();
-    }
+    // if ((interruptedthreads.back().time > kernel->stats->totalTicks)) {
+    //     kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
+    //     interruptedthreads.pop_back();
+    // }
 }
 
 //----------------------------------------------------------------------
@@ -88,25 +89,26 @@ Alarm::GoToSleepFor(int howLong)
 	temp.thread1 = kernel->currentThread;
     temp.time = kernel->stats->totalTicks + howLong;
 
-    
-    
-    if (interruptedthreads.empty()) {
-        interruptedthreads.push_back(temp);
-    }
 
-    int i, j;
-    Threadstruct newValue;
+    interruptedthreads->Insert(temp);   
+    
+    // if (interruptedthreads.empty()) {
+    //     interruptedthreads.push_back(temp);
+    // }
+
+    // int i, j;
+    // Threadstruct newValue;
 
     // sort by time descending
-    for (i = 1; i < interruptedthreads.size(); i++) {
-        newValue = interruptedthreads.at(i);
-        j = i;
-        while (j > 0 && interruptedthreads.at(j - 1).time > newValue.time) {
-              interruptedthreads.at(j) = interruptedthreads.at(j - 1);
-              j--;
-        }
-        interruptedthreads.at(j) = newValue;
-    }
+    // for (i = 1; i < interruptedthreads.size(); i++) {
+    //     newValue = interruptedthreads.at(i);
+    //     j = i;
+    //     while (j > 0 && interruptedthreads.at(j - 1).time > newValue.time) {
+    //           interruptedthreads.at(j) = interruptedthreads.at(j - 1);
+    //           j--;
+    //     }
+    //     interruptedthreads.at(j) = newValue;
+    // }
 
     IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
     kernel->currentThread->Sleep(true);
