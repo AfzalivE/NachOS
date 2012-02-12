@@ -12,8 +12,6 @@
 #include "alarm.h"
 #include "main.h"
 
-#include "list.h"
-
 //----------------------------------------------------------------------
 // Alarm::Alarm
 //      Initialize a software alarm clock.  Start up a timer device

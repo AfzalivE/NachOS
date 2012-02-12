@@ -23,6 +23,7 @@
 #include "timer.h"
 //#include "vector.h"
 #include "thread.h"
+#include "list.h"
 
 // The following class defines a software alarm clock. 
 class Alarm : public CallBackObj {
