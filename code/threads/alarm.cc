@@ -81,15 +81,19 @@ Alarm::GoToSleepFor(int howLong)
     int i, j;
     Threadstruct newValue;
 
-    // for (i = 1; i < interruptedthreads.size(); i++) {
-    //     newValue = interruptedthreads.at(i);
-    //     j = i;
-    //     while (j > 0 && interruptedthreads.at(j - 1).time > newValue.time) {
-    //           interruptedthreads[j] = interruptedthreads[j - 1];
-    //           j--;
-    //     }
-    //     interruptedthreads[j] = newValue;
-    // }
+    for (i = 1; i < interruptedthreads.size(); i++) {
+        newValue = interruptedthreads.at(i);
+        j = i;
+        while (j > 0 && interruptedthreads.at(j - 1).time > newValue.time) {
+              interruptedthreads[j] = interruptedthreads[j - 1];
+              j--;
+        }
+        interruptedthreads[j] = newValue;
+    }
+
+    for (int i = 0; i < interruptedthreads.size(); i++) {
+        printf("%i\n", interruptedthreads.at(i).thread1.time);
+    }
 
     kernel->interrupt->Disable();
     kernel->currentThread->Sleep(true);
