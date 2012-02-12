@@ -33,20 +33,18 @@ class Alarm : public CallBackObj {
     ~Alarm() { delete timer; }
     
 	void GoToSleepFor(int howLong); // suspend execution until time > now + x
-
+    int (Compare)(Threadstruct x, Threadstruct y);
+    SortedList<Threadstruct> threadlist;
 
   private:
   
-    Timer *timer;		// the hardware timer device
+    Timer *timer;       // the hardware timer device
 
-    struct Threadstruct	{
-    	    	Thread* thread1;
-    	    	int time;
-	};
+    struct Threadstruct {
+                Thread* thread1;
+                int time;
+    };
 
-    static int Compare(Threadstruct x, Threadstruct y);
-
-    SortedList<Threadstruct> threadlist;
 
     void PrintAll(Threadstruct t);
 
