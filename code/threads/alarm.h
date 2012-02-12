@@ -34,8 +34,8 @@ class Alarm : public CallBackObj {
     
 	void GoToSleepFor(int howLong); // suspend execution until time > now + x
     struct Threadstruct {
-                Thread* thread1;
-                int time;
+        Thread* thread1;
+        int time;
     };
     int Compare (Threadstruct x, Threadstruct y);
     SortedList<Threadstruct> *threadlist;
