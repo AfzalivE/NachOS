@@ -215,7 +215,7 @@ Condition::Condition(char* debugName)
 {
     name = debugName;
     // waitQueue = new List<Semaphore *>;
-    waitQueue = new List<Thread *>;
+    waitQueue = new SynchList<Thread *>;
 }
 
 //----------------------------------------------------------------------
