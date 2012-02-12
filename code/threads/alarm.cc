@@ -27,6 +27,12 @@ Alarm::Alarm(bool doRandom)
     timer = new Timer(doRandom, this);
 }
 
+static int Alarm::compare(Threadstruct x, Threadstruct y) {
+    if (x.time < y.time) return -1;
+    else if (x.time == y.time) return 0;
+    else return 1;
+}
+
 //----------------------------------------------------------------------
 // Alarm::CallBack
 //	Software interrupt handler for the timer device. The timer device is
@@ -57,12 +63,19 @@ Alarm::CallBack()
     Interrupt *interrupt = kernel->interrupt;
     MachineStatus status = interrupt->getStatus();
     
-    if ((interruptedthreads.back().time >= kernel->stats->totalTicks)) {
+    if ((threadlist.Front().time >= kernel->stats->totalTicks)) {
         IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
-        kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
-        interruptedthreads.pop_back();
+        kernel->scheduler->ReadyToRun(threadlist.Front().thread1);
+        (void) threadlist.RemoveFront();
         (void) kernel->interrupt->SetLevel(oldlevel);
     }
+
+//    if ((interruptedthreads.back().time >= kernel->stats->totalTicks)) {
+//        IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
+//        kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
+//        interruptedthreads.pop_back();
+//        (void) kernel->interrupt->SetLevel(oldlevel);
+//    }
 
     if (status != IdleMode) {	// is it time to quit?
 	   interrupt->YieldOnReturn();
@@ -73,6 +86,11 @@ Alarm::CallBack()
 // Alarm::GoToSleepFor
 //
 //----------------------------------------------------------------------
+
+void Alarm::PrintAll (Threadstruct t) {
+	DEBUG(dbgThread, t.time);
+}
+
 void
 Alarm::GoToSleepFor(int howLong)
 {
@@ -82,27 +100,16 @@ Alarm::GoToSleepFor(int howLong)
 	temp.thread1 = kernel->currentThread;
     temp.time = kernel->stats->totalTicks + howLong;
   
+
+    threadlist.Insert(temp);
+//    interruptedthreads.push_back(temp);
     
-    interruptedthreads.push_back(temp);
-    
 
-    int i, j;
-    Threadstruct newValue;
+    // sort by time descending, smaller time at the end
 
-    // sort by time descending
-    for (i = 1; i < interruptedthreads.size(); i++) {
-        newValue = interruptedthreads.at(i);
-        j = i;
-        while (j > 0 && interruptedthreads.at(j - 1).time > newValue.time) {
-              interruptedthreads.at(j) = interruptedthreads.at(j - 1);
-              j--;
-        }
-        interruptedthreads.at(j) = newValue;
-    }
 
-    for (int i = 0; i < interruptedthreads.size(); i++) {
-        DEBUG(dbgThread, interruptedthreads.at(i).time);
-    }
+
+    int i = 0; i < threadlist.Apply(PrintAll);
 
     IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
     kernel->currentThread->Sleep(false);
