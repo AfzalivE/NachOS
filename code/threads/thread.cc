@@ -64,6 +64,9 @@ Thread::~Thread()
     DEBUG(dbgThread, "Deleting thread: " << name);
 
     ASSERT(this != kernel->currentThread);
+    
+    DEBUG(dbgThread, "Deleting thread: " << name);
+    
     if (stack != NULL)
         DeallocBoundedArray((char *) stack, StackSize * sizeof(int));
 }
@@ -415,7 +418,7 @@ SimpleThread(int which)
     
     for (num = 0; num < 5; num++) {
         cout << "*** thread " << which << " looped " << num << " times\n";
-        kernel->alarm->GoToSleepFor(10000000);
+//        kernel->alarm->GoToSleepFor(10000000);
         kernel->currentThread->Yield();
     }
 }

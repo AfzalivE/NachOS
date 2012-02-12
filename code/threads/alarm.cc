@@ -79,10 +79,8 @@ Alarm::GoToSleepFor(int howLong)
     }
 
     int i, j;
-    printf("%s\n", "----------making temp thread");
     Threadstruct newValue;
 
-    printf("%s\n", "----------made temp thread");
     for (i = 1; i < interruptedthreads.size(); i++) {
         newValue = interruptedthreads.at(i);
         j = i;
