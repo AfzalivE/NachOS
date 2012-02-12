@@ -29,7 +29,7 @@ int Alarm::Compare(Threadstruct x, Threadstruct y) {
 Alarm::Alarm(bool doRandom)
 {
     timer = new Timer(doRandom, this);
-    threadlist = new SortedList<Threadstruct>(Compare);
+    threadlist = new SortedList(int Compare(*)(Threadstruct, Threadstruct));
 }
 
 //----------------------------------------------------------------------
