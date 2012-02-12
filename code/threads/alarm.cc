@@ -61,8 +61,10 @@ Alarm::CallBack()
 	   interrupt->YieldOnReturn();
     }
 
-    if ((interruptedthreads.back().time > kernel->stats->totalTicks)) {
+    if ((interruptedthreads.back().time >= kernel->stats->totalTicks)) {
+        IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
         kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
+        (void) kernel->interrupt->SetLevel(oldlevel);
         interruptedthreads.pop_back();
     }
 }
