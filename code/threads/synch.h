@@ -19,8 +19,6 @@
 #include "list.h"
 #include "main.h"
 
-#include "synchlist.h"
-
 // The following class defines a "semaphore" whose value is a non-negative
 // integer.  The semaphore has only two operations P() and V():
 //
