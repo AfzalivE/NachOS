@@ -56,12 +56,10 @@ Alarm::CallBack()
 	   interrupt->YieldOnReturn();
     }
 
-//     if ((interruptedthreads.back().time) > (kernel->stats->totalTicks)) {
-// //        interrupt->Enable();
-//         kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
-//         interruptedthreads.pop_back();
-// //        interrupt->Disable();
-//     }
+    if ((interruptedthreads.back().time) > (kernel->stats->totalTicks)) {
+        kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
+        interruptedthreads.pop_back();
+    }
 }
 
 void
@@ -93,4 +91,5 @@ Alarm::GoToSleepFor(int howLong)
 
     kernel->interrupt->Disable();
     kernel->currentThread->Sleep(true);
+    kernel->interrupt->Enable();
 }
