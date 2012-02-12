@@ -48,7 +48,7 @@ class Alarm : public CallBackObj {
 	int time;
 	};
     
-    static int ThreadCompare(Threadstruct x, Threadstruct y);
+    int ThreadCompare(Threadstruct x, Threadstruct y);
 
     SortedList<Threadstruct> *interruptedthreads = new SortedList<Threadstruct>(ThreadCompare);
 
