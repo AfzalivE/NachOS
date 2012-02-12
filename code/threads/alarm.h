@@ -50,7 +50,7 @@ class Alarm : public CallBackObj {
     
     int ThreadCompare(Threadstruct x, Threadstruct y);
 
-    SortedList<Threadstruct> *interruptedthreads = new SortedList<Threadstruct>(ThreadCompare);
+    SortedList<Threadstruct> interruptedthreads = new SortedList<Threadstruct>(ThreadCompare);
 
 
     void CallBack();		// called when the hardware
