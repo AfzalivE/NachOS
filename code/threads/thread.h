@@ -87,7 +87,7 @@ class Thread {
                                         // NOTE -- thread being deleted
                                         // must not be running when delete 
                                         // is called
-
+    int* waketime;                      // Time to wake
     // basic thread operations
 
     void Fork(VoidFunctionPtr func, void *arg); 
@@ -116,7 +116,6 @@ class Thread {
                                         // stack)
     ThreadStatus status;                // ready, running or blocked
     char* name;
-    int* waketime;                      // Time to wake
 
     void StackAllocate(VoidFunctionPtr func, void *arg);
                                         // Allocate a stack for thread.
