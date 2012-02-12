@@ -104,7 +104,7 @@ Alarm::GoToSleepFor(int howLong) {
   
     threadlist->Insert(temp);    
 
-    // IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
+    IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
     kernel->currentThread->Sleep(false);
-    // (void) kernel->interrupt->SetLevel(oldlevel);
+    (void) kernel->interrupt->SetLevel(oldlevel);
 }
