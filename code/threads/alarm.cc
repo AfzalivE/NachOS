@@ -57,10 +57,10 @@ Alarm::CallBack()
     }
 
     if ((interruptedthreads.back().time) > (kernel->stats->totalTicks)) {
-        interrupt->Enable();
+//        interrupt->Enable();
         kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
         interruptedthreads.pop_back();
-        interrupt->Disable();
+//        interrupt->Disable();
     }
 }
 
