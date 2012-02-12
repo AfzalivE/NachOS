@@ -36,7 +36,7 @@ class Alarm : public CallBackObj {
 
 	struct Threadstruct
 	{
-	Thread *thread1;
+	Thread thread1;
 	int time;
 	};
 
