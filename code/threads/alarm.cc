@@ -79,12 +79,12 @@ Alarm::GoToSleepFor(int howLong)
     }
 
     int i, j;
-    Thread* newValue;
+    Threadstruct newValue;
 
     for (i = 1; i < interruptedthreads.size(); i++) {
         newValue = interruptedthreads.at(i);
         j = i;
-        while (j > 0 && interruptedthreads.at(j - 1)->time > newValue->time) {
+        while (j > 0 && interruptedthreads.at(j - 1).time > newValue.time) {
               interruptedthreads[j] = interruptedthreads[j - 1];
               j--;
         }
