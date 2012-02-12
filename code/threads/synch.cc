@@ -255,12 +255,12 @@ void Condition::Wait(Lock* conditionLock)
      // waiter = new Semaphore("condition", 0);
      // waitQueue->Append(waiter);
 
-     IntStatus oldLevel = interrupt->SetLevel(IntOff);
      waitQueue->Append(currentThread);
 
 
      conditionLock->Release();
      // waiter->P();
+     IntStatus oldLevel = interrupt->SetLevel(IntOff);
      kernel->scheduler->ReadyToRun(waitQueue->RemoveFront());
 
      (void) interrupt->SetLevel(oldLevel);
