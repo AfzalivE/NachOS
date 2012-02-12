@@ -21,16 +21,6 @@
 //		occur at random, instead of fixed, intervals.
 //----------------------------------------------------------------------
 
-static int Alarm::Compare(Threadstruct x, Threadstruct y) {
-    if (x.time < y.time) {
-        return -1;
-    } else if (x.time == y.time) {
-        return 0;
-    } else {
-        return 1;
-    }
-}
-
 Alarm::Alarm(bool doRandom)
 {
     timer = new Timer(doRandom, this);
