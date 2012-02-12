@@ -64,7 +64,7 @@ Alarm::Alarm(bool doRandom)
 void 
 Alarm::CallBack() 
 {
-    DEBUG(dbgThread, "Entering Alarm::CallBack");
+    // DEBUG(dbgThread, "Entering Alarm::CallBack");
 
 
     Interrupt *interrupt = kernel->interrupt;
@@ -92,7 +92,7 @@ Alarm::CallBack()
 void
 Alarm::GoToSleepFor(int howLong) {
 
-    DEBUG(dbgThread, "Entering Alarm::GoToSleepFor");
+    // DEBUG(dbgThread, "Entering Alarm::GoToSleepFor");
 
     Thread* temp;
     temp = kernel->currentThread;
