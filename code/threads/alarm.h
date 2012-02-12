@@ -47,11 +47,6 @@ class Alarm : public CallBackObj {
 	int time;
 	};
 
-	bool operator < (const Threadstruct& left, const Threadstruct& right) {
-    	if (left.time < right.time) return true;
-    	return false;
-	}
-
 	vector<Threadstruct> interruptedthreads; //Whenever call back occurs, compare time to see to check ur vector to see if any thread should wake up
 
 	static int Alarm::IntCompare(int x, int y);

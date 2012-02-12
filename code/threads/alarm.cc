@@ -58,10 +58,18 @@ Alarm::CallBack()
 	   interrupt->YieldOnReturn();
     }
 
-    if ((interruptedthreads.back().time > kernel->stats->totalTicks)) {
-        kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
-        interruptedthreads.pop_back();
+
+    for (int i = 0; i < interruptedthreads.size(); i++){
+        if ((interruptedthreads.back().time > kernel->stats->totalTicks)) {
+            kernel->scheduler->ReadyToRun(interruptedthreads.at(i).thread1);
+            interruptedthreads.pop_back();           
+        }
     }
+
+    // if ((interruptedthreads.back().time > kernel->stats->totalTicks)) {
+    //     kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
+    //     interruptedthreads.pop_back();
+    // }
 }
 
 //----------------------------------------------------------------------
@@ -76,8 +84,6 @@ Alarm::GoToSleepFor(int howLong)
     temp.time = kernel->stats->totalTicks + howLong;
 
     interruptedthreads.push_back(temp);
-
-    sort(interruptedthreads.begin(), interruptedthreads.end());
 
     IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
     kernel->currentThread->Sleep(true);
