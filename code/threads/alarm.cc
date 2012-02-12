@@ -36,7 +36,7 @@ static int Compare(Thread* x, Thread* y) {
 Alarm::Alarm(bool doRandom)
 {
     timer = new Timer(doRandom, this);
-    threadlist = new SortedList<Thread>(Compare);
+    threadlist = new SortedList<Thread*>(Compare);
 }
 
 //----------------------------------------------------------------------
@@ -100,7 +100,7 @@ Alarm::CallBack()
 
 void
 Alarm::GoToSleepFor(int howLong) {
-    
+
     DEBUG(dbgThread, "Entering Alarm::GoToSleepFor");
 
     Thread t;
