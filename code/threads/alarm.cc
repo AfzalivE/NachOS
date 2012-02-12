@@ -100,6 +100,10 @@ Alarm::GoToSleepFor(int howLong)
         interruptedthreads.at(j) = newValue;
     }
 
+    for (int = 0; i < interruptedthreads.size(); i++) {
+        DEBUG(dbgThread, "" << interruptedthreads.at(i).time);
+    }
+
     IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
     kernel->currentThread->Sleep(false);
     (void) kernel->interrupt->SetLevel(oldlevel);
