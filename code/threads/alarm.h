@@ -34,7 +34,6 @@ class Alarm : public CallBackObj {
 	void GoToSleepFor(int howLong); // suspend execution until time > now + x
 
 
-//	vector<Threadstruct> interruptedthreads; //Whenever call back occurs, compare time to see to check ur vector to see if any thread should wake up
 	
 	
   private:
@@ -47,11 +46,15 @@ class Alarm : public CallBackObj {
 	Thread* thread1;
 	int time;
 	};
-    
-    int ThreadCompare(Threadstruct x, Threadstruct y);
 
-    SortedList<Threadstruct> interruptedthreads = new SortedList<Threadstruct>(ThreadCompare);
+	bool operator < (const Threadstruct& left, const Threadstruct& right) {
+    	if (left.time < right.time) return true;
+    	return false;
+	}
 
+	vector<Threadstruct> interruptedthreads; //Whenever call back occurs, compare time to see to check ur vector to see if any thread should wake up
+
+	static int Alarm::IntCompare(int x, int y);
 
     void CallBack();		// called when the hardware
 				// timer generates an interrupt

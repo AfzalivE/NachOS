@@ -13,11 +13,6 @@
 #include "main.h"
 #include "list.h"
 
-int Alarm::ThreadCompare(Threadstruct x, Threadstruct y) {
-    if (x.time < y.time) return -1;
-    else if (x.time == y.time) return 0;
-    else return 1;
-}
 
 //----------------------------------------------------------------------
 // Alarm::Alarm
@@ -63,15 +58,10 @@ Alarm::CallBack()
 	   interrupt->YieldOnReturn();
     }
 
-    if (interruptedthreads->Front->time > kernel->stats->totalTicks) {
-        kernel->scheduler->ReadyToRun(interruptedthreads->Front->thread1);
-        interruptedthreads->RemoveFront();
-    } 
-
-    // if ((interruptedthreads.back().time > kernel->stats->totalTicks)) {
-    //     kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
-    //     interruptedthreads.pop_back();
-    // }
+    if ((interruptedthreads.back().time > kernel->stats->totalTicks)) {
+        kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
+        interruptedthreads.pop_back();
+    }
 }
 
 //----------------------------------------------------------------------
@@ -85,26 +75,9 @@ Alarm::GoToSleepFor(int howLong)
 	temp.thread1 = kernel->currentThread;
     temp.time = kernel->stats->totalTicks + howLong;
 
+    interruptedthreads.push_back(temp);
 
-    interruptedthreads->Insert(temp);   
-    
-    // if (interruptedthreads.empty()) {
-    //     interruptedthreads.push_back(temp);
-    // }
-
-    // int i, j;
-    // Threadstruct newValue;
-
-    // sort by time descending
-    // for (i = 1; i < interruptedthreads.size(); i++) {
-    //     newValue = interruptedthreads.at(i);
-    //     j = i;
-    //     while (j > 0 && interruptedthreads.at(j - 1).time > newValue.time) {
-    //           interruptedthreads.at(j) = interruptedthreads.at(j - 1);
-    //           j--;
-    //     }
-    //     interruptedthreads.at(j) = newValue;
-    // }
+    sort(interruptedthreads.begin(), interruptedthreads.end());
 
     IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
     kernel->currentThread->Sleep(true);
