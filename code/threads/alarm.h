@@ -37,9 +37,7 @@ class Alarm : public CallBackObj {
    Timer *timer;       // the hardware timer device
 
    SortedList<Thread*> *threadlist;
-
-   void PrintAll(Thread* t);
-	 
+ 
    void GoToSleepFor(int howLong); // suspend execution until time > now + x 
 
    void CallBack();		// called when the hardware

@@ -89,10 +89,6 @@ Alarm::CallBack()
 //
 //----------------------------------------------------------------------
 
-void Alarm::PrintAll (Thread* t) {
-	DEBUG(dbgThread, t->waketime);
-}
-
 void
 Alarm::GoToSleepFor(int howLong) {
 
@@ -103,8 +99,6 @@ Alarm::GoToSleepFor(int howLong) {
     temp->waketime = kernel->stats->totalTicks + howLong;
   
     threadlist->Insert(temp);
-
-    threadlist->Apply((*PrintAll)(Thread&));
 
     IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff);
     kernel->currentThread->Sleep(false);
