@@ -87,7 +87,7 @@ class Thread {
                                         // NOTE -- thread being deleted
                                         // must not be running when delete 
                                         // is called
-    int* waketime;                      // Time to wake
+    int waketime;                      // Time to wake
     // basic thread operations
 
     void Fork(VoidFunctionPtr func, void *arg); 
