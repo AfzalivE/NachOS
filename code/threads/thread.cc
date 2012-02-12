@@ -418,7 +418,7 @@ SimpleThread(int which)
     
     for (num = 0; num < 5; num++) {
         cout << "*** thread " << which << " looped " << num << " times\n";
-        kernel->alarm->GoToSleepFor(10000000);
+        kernel->alarm->GoToSleepFor(100000000000000);
         kernel->currentThread->Yield();
     }
 }
