@@ -103,7 +103,7 @@ Alarm::GoToSleepFor(int howLong) {
 
     DEBUG(dbgThread, "Entering Alarm::GoToSleepFor");
 
-    Thread t;
+    Thread* t;
     t = kernel->currentThread;
     t->waketime = kernel->stats->totalTicks + howLong;
   
