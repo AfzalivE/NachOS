@@ -31,14 +31,8 @@ class Alarm : public CallBackObj {
 				// to "toCall" every time slice.
     ~Alarm() { delete timer; }
     
-    void WaitUntil(int x);	// suspend execution until time > now + x
-	void GoToSleepFor(int howLong);
+	void GoToSleepFor(int howLong); // suspend execution until time > now + x
 
-	struct Threadstruct
-	{
-	Thread* thread1;
-	int time;
-	};
 
 //	vector<Threadstruct> interruptedthreads; //Whenever call back occurs, compare time to see to check ur vector to see if any thread should wake up
 	
@@ -46,6 +40,18 @@ class Alarm : public CallBackObj {
   private:
   
     Timer *timer;		// the hardware timer device
+
+
+	struct Threadstruct
+	{
+	Thread* thread1;
+	int time;
+	};
+    
+    static int ThreadCompare(Threadstruct x, Threadstruct y);
+
+    SortedList<Threadstruct> *interruptedthreads = new SortedList<Threadstruct>(ThreadCompare);
+
 
     void CallBack();		// called when the hardware
 				// timer generates an interrupt
