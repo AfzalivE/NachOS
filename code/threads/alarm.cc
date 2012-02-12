@@ -12,6 +12,17 @@
 #include "alarm.h"
 #include "main.h"
 
+#include "list.h"
+
+static int 
+IntCompare(int x, int y) {
+    if (x < y) return -1;
+    else if (x == y) return 0;
+    else return 1;
+}
+
+// SortedList<Threadstruct> interruptedthreads = new SortedList<int>(IntCompare);
+
 //----------------------------------------------------------------------
 // Alarm::Alarm
 //      Initialize a software alarm clock.  Start up a timer device
@@ -56,10 +67,14 @@ Alarm::CallBack()
 	   interrupt->YieldOnReturn();
     }
 
-    if ((interruptedthreads.back().time) > (kernel->stats->totalTicks)) {
-        kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
-        interruptedthreads.pop_back();
-    }
+    // if (interruptedthreads.Front.time > kernel->stats->totalTicks) {
+    //     kernel->scheduler->ReadyToRun(interruptedthreads.back.thread1);
+    // } 
+
+    // if ((interruptedthreads.back().time) > (kernel->stats->totalTicks)) {
+    //     kernel->scheduler->ReadyToRun(interruptedthreads.back().thread1);
+    //     interruptedthreads.pop_back();
+    // }
 }
 
 void
@@ -70,7 +85,6 @@ Alarm::GoToSleepFor(int howLong)
     temp.time = kernel->stats->totalTicks + howLong;
 
     
-    // sort by time descending
     
     if (interruptedthreads.empty()) {
         interruptedthreads.push_back(temp);
@@ -79,6 +93,7 @@ Alarm::GoToSleepFor(int howLong)
     int i, j;
     Threadstruct newValue;
 
+    // sort by time descending
     for (i = 1; i < interruptedthreads.size(); i++) {
         newValue = interruptedthreads.at(i);
         j = i;
