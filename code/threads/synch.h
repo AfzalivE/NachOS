@@ -138,7 +138,7 @@ class Condition {
 
   private:
     char* name;
-    List<Thread* > *waitQueue;
+    List<Thread* > *waitQ;
     // List<Semaphore *> *waitQueue;       // list of waiting threads
 };
 #endif // SYNCH_H

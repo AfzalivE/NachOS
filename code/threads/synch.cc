@@ -215,7 +215,7 @@ Condition::Condition(char* debugName)
 {
     name = debugName;
     // waitQueue = new List<Semaphore *>;
-    waitQueue = new List<Thread *>;
+    waitQ = new List<Thread *>;
 }
 
 //----------------------------------------------------------------------
@@ -225,7 +225,7 @@ Condition::Condition(char* debugName)
 
 Condition::~Condition()
 {
-    delete waitQueue;
+    delete waitQ;
 }
 
 //----------------------------------------------------------------------
@@ -256,12 +256,12 @@ void Condition::Wait(Lock* conditionLock)
      // waitQueue->Append(waiter);
 
      IntStatus oldLevel = interrupt->SetLevel(IntOff);
-     waitQueue->Append(currentThread);
+     waitQ->Append(currentThread);
 
 
      conditionLock->Release();
      // waiter->P();
-     kernel->scheduler->ReadyToRun(waitQueue->RemoveFront());
+     kernel->scheduler->ReadyToRun(waitQ->RemoveFront());
 
      (void) interrupt->SetLevel(oldLevel);
 
@@ -293,13 +293,13 @@ void Condition::Signal(Lock* conditionLock)
     
     ASSERT(conditionLock->IsHeldByCurrentThread());
     
-    if (!waitQueue->IsEmpty()) {
+    if (!waitQ->IsEmpty()) {
         // waiter = waitQueue->RemoveFront();
         // waiter->V();
 
         IntStatus oldLevel = interrupt->SetLevel(IntOff);
 
-        kernel->scheduler->ReadyToRun(waitQueue->RemoveFront());
+        kernel->scheduler->ReadyToRun(waitQ->RemoveFront());
 
         (void) interrupt->SetLevel(oldLevel);
     }
@@ -314,7 +314,7 @@ void Condition::Signal(Lock* conditionLock)
 
 void Condition::Broadcast(Lock* conditionLock) 
 {
-    while (!waitQueue->IsEmpty()) {
+    while (!waitQ->IsEmpty()) {
         Signal(conditionLock);
     }
 }
