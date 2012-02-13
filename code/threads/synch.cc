@@ -256,8 +256,8 @@ void Condition::Wait(Lock* conditionLock)
      // waiter = new Semaphore("condition", 0);
      // waitQueue->Append(waiter);
 
+     currentThread->Sleep(false);
      waitQueue->Append(currentThread);
-
      
      conditionLock->Release();
      // waiter->P();
