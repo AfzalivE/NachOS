@@ -252,10 +252,11 @@ Thread::Sleep (bool finishing)
     DEBUG(dbgThread, "Sleeping thread: " << name);
 
     status = BLOCKED;
-    while ((nextThread = kernel->scheduler->FindNextToRun()) == NULL)
-        kernel->interrupt->Idle();      // no one to run, wait for an 
-                                        // interrupt
-    
+    while ((nextThread = kernel->scheduler->FindNextToRun()) == NULL){
+            DEBUG(dbgThread, "while loop: " << name);
+            kernel->interrupt->Idle();      // no one to run, wait for an 
+                                            // interrupt
+        }
     // returns when it's time for us to run
     kernel->scheduler->Run(nextThread, finishing); 
 }
