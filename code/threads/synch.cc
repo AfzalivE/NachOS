@@ -262,7 +262,7 @@ void Condition::Wait(Lock* conditionLock)
      conditionLock->Release();
      // waiter->P();
 
-     if (!waitQueue->IsEmpty) {
+     if (!waitQueue->IsEmpty()) {
          kernel->scheduler->ReadyToRun(waitQueue->RemoveFront());
      }
 
