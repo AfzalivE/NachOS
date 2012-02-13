@@ -247,8 +247,6 @@ void Condition::Wait(Lock* conditionLock)
 {
      // Semaphore *waiter;
 
-    DEBUG(dbgThread, "Entering Condition::Wait");
-
     Interrupt *interrupt = kernel->interrupt;
     
     IntStatus oldLevel = interrupt->SetLevel(IntOff);
@@ -266,9 +264,9 @@ void Condition::Wait(Lock* conditionLock)
      conditionLock->Release();
      // waiter->P();
 
-     if (!waitQueue->IsEmpty()) {
+     // if (!waitQueue->IsEmpty()) {
          kernel->scheduler->ReadyToRun(waitQueue->RemoveFront());
-     }
+     // }
 
      conditionLock->Acquire();
 
