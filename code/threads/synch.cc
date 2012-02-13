@@ -247,6 +247,8 @@ void Condition::Wait(Lock* conditionLock)
 {
      // Semaphore *waiter;
 
+    DEBUG(dbgThread, "Entering Condition::Wait");
+
     Interrupt *interrupt = kernel->interrupt;
     IntStatus oldLevel = interrupt->SetLevel(IntOff);
     Thread *currentThread = kernel->currentThread;
@@ -290,6 +292,7 @@ void Condition::Wait(Lock* conditionLock)
 
 void Condition::Signal(Lock* conditionLock)
 {
+    DEBUG(dbgThread, "Entering Condition::signal");
     Interrupt *interrupt = kernel->interrupt;
     Thread *currentThread = kernel->currentThread;
 
@@ -318,6 +321,7 @@ void Condition::Signal(Lock* conditionLock)
 
 void Condition::Broadcast(Lock* conditionLock) 
 {
+    DEBUG(dbgThread, "Entering Condition::Broadcast");
     while (!waitQueue->IsEmpty()) {
         Signal(conditionLock);
     }
