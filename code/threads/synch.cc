@@ -257,12 +257,11 @@ void Condition::Wait(Lock* conditionLock)
 
      // waiter = new Semaphore("condition", 0);
      // waitQueue->Append(waiter);
-     
-     conditionLock->Release();
 
      waitQueue->Append(currentThread);
      currentThread->Sleep(false);
      
+     conditionLock->Release();
      // waiter->P();
 
      // if (!waitQueue->IsEmpty()) {
