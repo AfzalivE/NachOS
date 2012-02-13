@@ -199,7 +199,7 @@ void Lock::Acquire()
 
 
     lockHolder = kernel->currentThread;
-    value = false;
+    // value = false;
     (void) interrupt->SetLevel(oldLevel);
 }
 
