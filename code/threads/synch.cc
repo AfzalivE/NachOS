@@ -262,13 +262,13 @@ void Condition::Wait(Lock* conditionLock)
      currentThread->Sleep(false);
      
      conditionLock->Release();
+     conditionLock->Acquire();
      // waiter->P();
 
      // if (!waitQueue->IsEmpty()) {
          kernel->scheduler->ReadyToRun(waitQueue->RemoveFront());
      // }
 
-     conditionLock->Acquire();
 
      (void) interrupt->SetLevel(oldLevel);
      
