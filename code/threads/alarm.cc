@@ -64,7 +64,7 @@ Alarm::Alarm(bool doRandom)
 void 
 Alarm::CallBack() 
 {
-    DEBUG(dbgThread, "Entering Alarm::CallBack");
+    // DEBUG(dbgThread, "Entering Alarm::CallBack");
 
 
     Interrupt *interrupt = kernel->interrupt;
