@@ -257,7 +257,7 @@ void Condition::Wait(Lock* conditionLock)
      // waitQueue->Append(waiter);
 
      waitQueue->Append(currentThread);
-     currentThread->Sleep(false);
+     
      
      conditionLock->Release();
      // waiter->P();
