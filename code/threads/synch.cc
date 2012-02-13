@@ -220,7 +220,7 @@ void Lock::Release()
 {
     ASSERT(IsHeldByCurrentThread());
     lockHolder = NULL;
-    value = true;
+    // value = true;
     // semaphore->V();
 
     Interrupt *interrupt = kernel->interrupt;
