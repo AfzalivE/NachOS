@@ -195,7 +195,7 @@ void Lock::Acquire()
     if (value == false)  {
         queue->Append(currentThread);
         currentThread->Sleep(false);
-        value = false;
+        value = true;
     }
 
     (void) interrupt->SetLevel(oldLevel);
@@ -217,12 +217,12 @@ void Lock::Acquire()
 
 void Lock::Release()
 {
+    Thread *currentThread = kernel->currentThread;
     ASSERT(IsHeldByCurrentThread());
     lockHolder = NULL;
     // semaphore->V();
 
     Interrupt *interrupt = kernel->interrupt;
-    Thread *currentThread = kernel->currentThread;
    
 
     if (!queue->IsEmpty()) {
