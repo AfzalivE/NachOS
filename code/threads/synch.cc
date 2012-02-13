@@ -201,7 +201,7 @@ void Lock::Acquire()
 
 
     lockHolder = kernel->currentThread;
-    // value = false;
+
     (void) interrupt->SetLevel(oldLevel);
 }
 
@@ -231,6 +231,8 @@ void Lock::Release()
         IntStatus oldLevel = kernel->interrupt->SetLevel(IntOff);
         kernel->scheduler->ReadyToRun(queue->RemoveFront());
         kernel->interrupt->SetLevel(oldLevel);
+    } else {
+        value = true;
     }
 }
 
