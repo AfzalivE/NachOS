@@ -445,8 +445,9 @@ Thread::SelfTest()
     Thread *t = new Thread("forked thread");
 
     t->Fork((VoidFunctionPtr) SimpleThread, (void *) 1);
+    t->Join();
     // kernel->currentThread->Yield();
-    kernel->currentThread->Join();
+    DEBUG("dbgThread", ":/");    
     SimpleThread(0);
 }
 
