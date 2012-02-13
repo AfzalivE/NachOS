@@ -99,6 +99,13 @@ class Thread {
     void Begin();                       // Startup code for the thread        
     void Finish();                      // The thread is done executing
     
+    void Join();
+
+    bool joinCalled;
+    bool joinAllow;
+
+    Thread *joinFrom;                   // Parent thread
+
     void CheckOverflow();               // Check if thread stack has 
                                         // overflowed
     void setStatus(ThreadStatus st) { status = st; }

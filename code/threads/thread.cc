@@ -33,9 +33,10 @@ const int STACK_FENCEPOST = 0xdedbeef;
 //      "threadName" is an arbitrary string, useful for debugging.
 //----------------------------------------------------------------------
 
-Thread::Thread(char* threadName)
+Thread::Thread(char* threadName, bool joinMayBeCalled)
 {
     name = threadName;
+    joinAllow = joinMayBeCalled;
     stackTop = NULL;
     stack = NULL;
     waketime = 0;
@@ -46,6 +47,7 @@ Thread::Thread(char* threadName)
                                         // of machine registers
     }
     space = NULL;
+    joinCalled = false;
 }
 
 //----------------------------------------------------------------------
@@ -177,6 +179,11 @@ void
 Thread::Finish ()
 {
     (void) kernel->interrupt->SetLevel(IntOff);                
+    
+    if (joinCalled) {
+        kernel->scheduler->ReadyToRun(joinFrom);
+    }
+
     ASSERT(this == kernel->currentThread);
     
     DEBUG(dbgThread, "Finishing thread: " << name);
@@ -438,7 +445,17 @@ Thread::SelfTest()
     Thread *t = new Thread("forked thread");
 
     t->Fork((VoidFunctionPtr) SimpleThread, (void *) 1);
-    kernel->currentThread->Yield();
+    // kernel->currentThread->Yield();
+    kernel->currentThread->Join();
     SimpleThread(0);
 }
 
+void Thread::Join() {
+    if (joinAllow) {
+        joinCalled = true;
+        joinFrom = kernel->currentThread;
+        IntStatus oldLevel = kernel->interrupt->SetLevel(IntOff);
+        kernel->currentThread->Sleep(false);
+        kernel->interrupt->SetLevel(oldLevel);
+    }
+}
