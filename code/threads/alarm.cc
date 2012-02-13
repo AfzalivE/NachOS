@@ -58,8 +58,12 @@ Alarm::Alarm(bool doRandom)
 //	Also, to keep from looping forever, we check if there's
 //	nothing on the ready list, and there are no other pending
 //	interrupts.  In this case, we can safely halt.
+//
+//  Also if threadlist is not empty, mark the sleeping thread as ready
+//  when it's waketime is has been reached or surpassed.
+//  
+//  Q1_CHANGE
 //----------------------------------------------------------------------
-
 
 void 
 Alarm::CallBack() 
@@ -86,7 +90,10 @@ Alarm::CallBack()
 
 //----------------------------------------------------------------------
 // Alarm::GoToSleepFor
-//
+//  Makes a thread go to sleep for the specified time by setting its
+//  waketime to the current time + the specified time. Inserts it into
+//  a sorted list of threads to wake it up later when Alarm::Callback
+//  is called.
 //----------------------------------------------------------------------
 
 void

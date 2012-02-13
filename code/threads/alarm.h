@@ -21,7 +21,6 @@
 #include "utility.h"
 #include "callback.h"
 #include "timer.h"
-//#include "vector.h"
 #include "list.h"
 #include "thread.h"
 
@@ -32,9 +31,9 @@ class Alarm : public CallBackObj {
 				// to "toCall" every time slice.
     ~Alarm() { delete timer; }
 
-   void GoToSleepFor(int howLong); // suspend execution until time > now + x 
+   void GoToSleepFor(int howLong); // suspend execution until time > now + x // Q1_CHANGE
 
-   SortedList<Thread*> *threadlist;
+   SortedList<Thread*> *threadlist; // sorted list of threads that are suspended // Q1_CHANGE
     
     
   private:
