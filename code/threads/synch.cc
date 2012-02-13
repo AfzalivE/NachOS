@@ -192,7 +192,7 @@ void Lock::Acquire()
     Thread *currentThread = kernel->currentThread;
 
     IntStatus oldLevel = kernel->interrupt->SetLevel(IntOff);
-    if (value == true && !queue.IsEmpty())  {
+    if (value == true)  {
         queue->Append(currentThread);
         currentThread->Sleep(false);
     }
