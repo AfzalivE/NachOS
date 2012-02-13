@@ -195,6 +195,7 @@ void Lock::Acquire()
     if (value == true)  {
         queue->Append(currentThread);
         currentThread->Sleep(false);
+        value = false;
     }
 
     (void) interrupt->SetLevel(oldLevel);
