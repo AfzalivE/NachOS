@@ -82,11 +82,7 @@ class Lock {
   private:
     char *name;              // debugging assist
     Thread *lockHolder;      // thread currently holding lock
-    // Semaphore *semaphore;    // we use a semaphore to implement lock
-
-    List<Thread *> *queue;
-    bool value;
-
+    Semaphore *semaphore;    // we use a semaphore to implement lock
 };
 
 // The following class defines a "condition variable".  A condition
@@ -142,28 +138,7 @@ class Condition {
 
   private:
     char* name;
-    // List<Semaphore *> *waitQueue;       // list of waiting threads
     List<Thread *> *waitQueue;
+    // List<Semaphore *> *waitQueue;       // list of waiting threads
 };
-
-// class Condition2 {
-//   public:
-//     Condition2(char* debugName);         // initialize condition to 
-//                                         // "no one waiting"
-//     ~Condition2();                       // deallocate the condition
-//     char* getName2() { return (name); }
-    
-//     void Wait2(Lock *conditionLock);     // these are the 3 operations on 
-//                                         // condition variables; releasing the 
-//                                         // lock and going to sleep are 
-//                                         // *atomic* in Wait()
-//     void Signal2(Lock *conditionLock);   // conditionLock must be held by
-//     void Broadcast2(Lock *conditionLock);// the currentThread for all of 
-//                                         // these operations
-//     // SelfTest routine provided by SyncLists
-
-//   private:
-//     char* name;
-//     List<Thread *> *waitQueue;       // list of waiting threads
-// };
 #endif // SYNCH_H
