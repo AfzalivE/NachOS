@@ -82,7 +82,11 @@ class Lock {
   private:
     char *name;              // debugging assist
     Thread *lockHolder;      // thread currently holding lock
-    Semaphore *semaphore;    // we use a semaphore to implement lock
+    // Semaphore *semaphore;    // we use a semaphore to implement lock
+
+    List<Thread *> *queue;
+    bool value;
+
 };
 
 // The following class defines a "condition variable".  A condition
