@@ -218,6 +218,7 @@ void Lock::Release()
 {
     ASSERT(IsHeldByCurrentThread());
     lockHolder = NULL;
+    value = true;
     // semaphore->V();
 
     Interrupt *interrupt = kernel->interrupt;
@@ -228,8 +229,6 @@ void Lock::Release()
         IntStatus oldLevel = kernel->interrupt->SetLevel(IntOff);
         kernel->scheduler->ReadyToRun(queue->RemoveFront());
         kernel->interrupt->SetLevel(oldLevel);
-    } else {
-        value = true;
     }
 }
 
