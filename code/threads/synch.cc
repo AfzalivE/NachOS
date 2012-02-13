@@ -192,7 +192,7 @@ void Lock::Acquire()
     Thread *currentThread = kernel->currentThread;
 
     IntStatus oldLevel = kernel->interrupt->SetLevel(IntOff);
-    if (value == true)  {
+    if (value == false)  {
         queue->Append(currentThread);
         currentThread->Sleep(false);
         value = false;
@@ -230,7 +230,7 @@ void Lock::Release()
         kernel->scheduler->ReadyToRun(queue->RemoveFront());
         kernel->interrupt->SetLevel(oldLevel);
     } else {
-        value = false;
+        value = true;
     }
 }
 
