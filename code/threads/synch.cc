@@ -197,10 +197,10 @@ void Lock::Acquire()
         currentThread->Sleep(false);
     }
 
-    (void) interrupt->SetLevel(oldLevel);
-
 
     lockHolder = kernel->currentThread;
+
+    (void) interrupt->SetLevel(oldLevel);
 }
 
 //----------------------------------------------------------------------
