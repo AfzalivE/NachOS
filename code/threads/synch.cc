@@ -247,6 +247,8 @@ void Condition::Wait(Lock* conditionLock)
 {
      // Semaphore *waiter;
 
+    DEBUG(dbgThread, "Entering Condition::Wait");
+
     Interrupt *interrupt = kernel->interrupt;
     
     IntStatus oldLevel = interrupt->SetLevel(IntOff);
