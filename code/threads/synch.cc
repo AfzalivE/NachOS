@@ -195,6 +195,8 @@ void Lock::Acquire()
     if (value == false) {
         queue->Append(currentThread);
         kernel->currentThread->Sleep(false);
+    } else {
+        value = false;
     }
 
 
