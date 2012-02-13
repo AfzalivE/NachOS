@@ -82,7 +82,7 @@ class Thread {
     void *machineState[MachineStateSize];
                                         // all registers except for stackTop
   public:
-    Thread(char* debugName) bool joinMayBeCalled);            // initialize a Thread 
+    Thread(char* debugName, bool joinMayBeCalled);            // initialize a Thread 
     ~Thread();                          // deallocate a Thread
                                         // NOTE -- thread being deleted
                                         // must not be running when delete 
