@@ -192,9 +192,9 @@ void Lock::Acquire()
     Thread *currentThread = kernel->currentThread;
 
     IntStatus oldLevel = kernel->interrupt->SetLevel(IntOff);
-    if (value == true) {
+    if (value == false) {
         queue->Append(currentThread);
-        currentThread->Sleep(false);
+        kernel->currentThread->Sleep(false);
     }
 
 
