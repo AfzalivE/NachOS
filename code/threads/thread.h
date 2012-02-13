@@ -82,7 +82,7 @@ class Thread {
     void *machineState[MachineStateSize];
                                         // all registers except for stackTop
   public:
-    Thread(char* debugName);            // initialize a Thread 
+    Thread(char* debugName) bool joinMayBeCalled);            // initialize a Thread 
     ~Thread();                          // deallocate a Thread
                                         // NOTE -- thread being deleted
                                         // must not be running when delete 
@@ -103,7 +103,7 @@ class Thread {
 
     bool joinCalled;
     bool joinAllow;
-
+    
     Thread *joinFrom;                   // Parent thread
 
     void CheckOverflow();               // Check if thread stack has 
@@ -116,7 +116,7 @@ class Thread {
 
   private:
     // some of the private data for this class is listed above
-    
+   
     int *stack;                         // Bottom of the stack, NULL  
                                         // if this is the main thread
                                         // (If NULL, don't deallocate
