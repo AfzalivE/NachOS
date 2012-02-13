@@ -159,13 +159,8 @@ Semaphore::SelfTest()
 Lock::Lock(char* debugName)
 {
     name = debugName;
-    // semaphore = new Semaphore("lock", 1); // initially, unlocked
-    
-    queue = new List<Thread *>;
-    value = true;
-
+    semaphore = new Semaphore("lock", 1); // initially, unlocked
     lockHolder = NULL;
-
 }
 
 //----------------------------------------------------------------------
@@ -174,8 +169,7 @@ Lock::Lock(char* debugName)
 //----------------------------------------------------------------------
 Lock::~Lock()
 {
-    // delete semaphore;
-    delete queue;
+    delete semaphore;
 }
 
 //----------------------------------------------------------------------
@@ -187,18 +181,7 @@ Lock::~Lock()
 
 void Lock::Acquire()
 {
-    // semaphore->P();
-    Interrupt *interrupt = kernel->interrupt;
-    Thread *currentThread = kernel->currentThread;
-
-    IntStatus oldLevel = kernel->interrupt->SetLevel(IntOff);
-    if (value == true) {
-        queue->Append(currentThread);
-        currentThread->Sleep(false);
-    }
-
-    (void) interrupt->SetLevel(oldLevel);
-
+    semaphore->P();
     lockHolder = kernel->currentThread;
 }
 
@@ -217,20 +200,7 @@ void Lock::Release()
 {
     ASSERT(IsHeldByCurrentThread());
     lockHolder = NULL;
-    // semaphore->V();
-
-    Interrupt *interrupt = kernel->interrupt;
-    Thread *currentThread = kernel->currentThread;
-   
-
-    if (!queue->IsEmpty()) {
-        IntStatus oldLevel = kernel->interrupt->SetLevel(IntOff);
-        kernel->scheduler->ReadyToRun(queue->RemoveFront());
-        kernel->interrupt->SetLevel(oldLevel);
-    } else {
-        value = true;
-    }
-
+    semaphore->V();
 }
 
 //----------------------------------------------------------------------
@@ -278,14 +248,14 @@ void Condition::Wait(Lock* conditionLock)
      // Semaphore *waiter;
 
     Interrupt *interrupt = kernel->interrupt;
-    // Thread *currentThread = kernel->currentThread;
+    Thread *currentThread = kernel->currentThread;
     
      ASSERT(conditionLock->IsHeldByCurrentThread());
 
      // waiter = new Semaphore("condition", 0);
      // waitQueue->Append(waiter);
 
-     waitQueue->Append(kernel->currentThread);
+     waitQueue->Append(currentThread);
 
      IntStatus oldLevel = interrupt->SetLevel(IntOff);
      
