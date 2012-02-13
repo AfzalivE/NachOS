@@ -159,7 +159,11 @@ Semaphore::SelfTest()
 Lock::Lock(char* debugName)
 {
     name = debugName;
-    semaphore = new Semaphore("lock", 1); // initially, unlocked
+    // semaphore = new Semaphore("lock", 1); // initially, unlocked
+
+    queue = new List<Thread *>;
+    value = true;
+
     lockHolder = NULL;
 }
 
@@ -169,7 +173,8 @@ Lock::Lock(char* debugName)
 //----------------------------------------------------------------------
 Lock::~Lock()
 {
-    delete semaphore;
+    // delete semaphore;
+    delete queue;
 }
 
 //----------------------------------------------------------------------
@@ -181,7 +186,20 @@ Lock::~Lock()
 
 void Lock::Acquire()
 {
-    semaphore->P();
+    // semaphore->P();
+    
+    Interrupt *interrupt = kernel->interrupt;
+    Thread *currentThread = kernel->currentThread;
+
+    IntStatus oldLevel = kernel->interrupt->SetLevel(IntOff);
+    if (value == true) {
+        queue->Append(currentThread);
+        currentThread->Sleep(false);
+    }
+
+    (void) interrupt->SetLevel(oldLevel);
+
+
     lockHolder = kernel->currentThread;
 }
 
@@ -200,7 +218,19 @@ void Lock::Release()
 {
     ASSERT(IsHeldByCurrentThread());
     lockHolder = NULL;
-    semaphore->V();
+    // semaphore->V();
+
+    Interrupt *interrupt = kernel->interrupt;
+    Thread *currentThread = kernel->currentThread;
+   
+
+    if (!queue->IsEmpty()) {
+        IntStatus oldLevel = kernel->interrupt->SetLevel(IntOff);
+        kernel->scheduler->ReadyToRun(queue->RemoveFront());
+        kernel->interrupt->SetLevel(oldLevel);
+    } else {
+        value = true;
+    }
 }
 
 //----------------------------------------------------------------------
