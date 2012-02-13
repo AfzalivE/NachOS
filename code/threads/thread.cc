@@ -442,12 +442,12 @@ Thread::SelfTest()
 {
     DEBUG(dbgThread, "Entering Thread::SelfTest");
 
-    Thread *t = new Thread("forked thread");
+    Thread *t = new Thread("forked thread", true);
 
     t->Fork((VoidFunctionPtr) SimpleThread, (void *) 1);
     t->Join();
     // kernel->currentThread->Yield();
-    DEBUG("dbgThread", ":/");    
+    DEBUG("dbgThread", "test");    
     SimpleThread(0);
 }
 
