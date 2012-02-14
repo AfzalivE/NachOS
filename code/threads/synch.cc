@@ -231,7 +231,7 @@ void Lock::Release()
         kernel->scheduler->ReadyToRun(queue->RemoveFront());
         kernel->interrupt->SetLevel(oldLevel);
     } else {
-        value = true;
+        value = true;   // Lock value
     }
 }
 
