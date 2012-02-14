@@ -160,7 +160,7 @@ Lock::Lock(char* debugName)
 {
     name = debugName;
 
-    queue = new List<Thread *>; // initialize queue
+    queue = new List<Thread *>; // initialize queue // Q3_CHANGE
     value = true;
 
     lockHolder = NULL;
@@ -172,7 +172,7 @@ Lock::Lock(char* debugName)
 //----------------------------------------------------------------------
 Lock::~Lock()
 {
-    delete queue; // Q3_CHANGE
+    delete queue; // Q3_CHANGE 
 }
 
 //----------------------------------------------------------------------
@@ -195,7 +195,7 @@ void Lock::Acquire()
         queue->Append(currentThread);
         kernel->currentThread->Sleep(false);
     } else {
-        value = false;
+        value = false; // set lock to busy // Q3_CHANGE
     }
 
 
@@ -231,7 +231,7 @@ void Lock::Release()
         kernel->scheduler->ReadyToRun(queue->RemoveFront());
         kernel->interrupt->SetLevel(oldLevel);
     } else {
-        value = true;   // Lock value
+        value = true;   // Set lock to free // Q3_CHANGE
     }
 }
 
@@ -246,7 +246,6 @@ void Lock::Release()
 Condition::Condition(char* debugName)
 {
     name = debugName;
-    // waitQueue = new List<Semaphore *>;
     waitQueue = new List<Thread *>;
 }
 
