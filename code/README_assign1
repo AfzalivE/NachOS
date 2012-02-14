@@ -1,0 +1,152 @@
+README                                                                  
+                                             
+Asn.1 3SH3
+
+Group 15:
+- Atullya Singh           singha27        1160107
+- Afzal Najam             najama          0969550
+- Maria Alabdullatif      alabdm          0971798
+
+
+=============================================
+========Files used in this Assignment========
+=============================================
+•	thread.cc
+•	thread.h
+•	synch.cc
+•	synch.h
+•	alarm.cc
+•	alarm.h
+
+=============================================
+==================Problem 1==================
+=============================================
+
+	Code Edited:
+	Alarm.h
+	Alarm.cc
+	thread.cc
+	thread.h 
+
+	Bullet Points:
+
+		In thread.h
+		•	waketime attribute introduced for Thread
+
+		In thread.cc
+		•	inclusion of waketime attribute for Thread, as a measurement of how threads will be sorted in the list used in GoToSleepFor.
+
+		In alarm.h
+		•	declaration of threadlist, a sorted list of threads to wake/sleep
+		•	declaration of GoToSleepFor(int howLong) function
+
+		In alarm.cc
+		•	inclusion of "list.h"
+		•	inclusion of threadlist, that contains a sorted list of threads, sorted by their waketime (ascending)
+		•	inclusion of a Compare method that compares the waketime of two threads, in order to sort the thread among the list of sleeping threads in ascending order.
+		•	alteration of Alarm::CallBack. 
+				- an if-statement that figures out when to wake the thread again, removing the sorted thread from the top of the list.
+		•	addition of an Alarm::GoToSleepFor function: suspends execution until time = now + x (x is input value)
+				- sets the current thread (saved as temp) to sleep, while setting its future waketime.
+				- when appending temp to the threadlist, it is sorted by waketime (ascending)
+				- disable interrupts, set the current thread to expect to be awakened in the future, and enable interrupts 
+				(interrupt handling to preserve atomicity)
+
+=============================================
+==================Problem 2==================
+=============================================
+
+	Code Edited:
+	synch.cc
+	synch.h
+
+	Bullet Points:
+
+		•	the adopted idea here is to eradicate the middleman (Semaphores).
+
+		In synch.h
+		•	eradication of the queue of semaphores, to be replaced by a list queue of threads. This is used in the condition variables to preserved the threads that are asleep and need waking up.
+
+		In synch.cc
+		•	initialization of the waitQueue
+		•	alteration of Condition::Wait.
+				- although the lock used to protect this condition variable (named conditionLock) uses semaphores, the use of semaphores is not directly implemented in the Wait function.
+				- interrupt disabling and enabling spans the scope of the Wait function, in order to ensure atomicity of code execution.
+				- after asserting that the lock is held by the current thread, the lock is ensured to be released from the current thread, and both sides (the lock will know who it is held by, and the next thread will know that it has acquired the lock) will be notified in the subsequent code.
+				- as soon as the lock is released, it is acquired by the next thread.
+		•	alteration of Condition::Signal
+				- although the lock used to protect this condition variable (named conditionLock) uses semaphores, the use of semaphores is not directly implemented in the Wait function.
+				- the if-statement is altered to replace semaphores by directly placing the thread in the waitQueue to the ready queue for the CPU to expect it
+		
+
+=============================================
+==================Problem 3==================
+=============================================
+
+	Code Edited:
+	synch.h
+	synch.cc
+
+	Bullet Points:
+
+	In synch.h
+	•	created a list threads, and an attribute 'value' of type bool to work as a condition variable (lock value)
+    bool value;
+    •	Removed semaphore queue
+
+	In synch.cc
+	•	created a variable lock (type Lock) and condition (type) condition to be used in Semaphore::P and Semaphore::V 
+	•	alteration of Semaphore::Semaphore()
+		- initialize lock and condition variables
+	•	alteration of Semaphore::~Semaphore()
+		- nothing to destruct
+	•	alteration of Semaphore::P()
+		- Completely switched to lock and condition variables
+		- Acquire lock, if value <= 0 then put thread to sleep, otherwise decrement the value and release lock
+	•	alteration of Semaphore::V()
+		- Completely switched to lock and condition variables
+		- Acquire lock, increment value, wake up the thread, release lock
+	•	alteration of Lock::~Lock()
+			- replace the semaphores with a queue
+	•	alteration of Lock::Acquire()
+			- interrupt disabling and enabling spans almost the entire scope of the Acquire function, in order to ensure atomicity of code execution.
+			- another reason for the above, is that Thread::Sleep cannot function as desired while interrupts are enabled
+			- value: false replaces the 0 in semaphore implementation, and true replaces the 1
+	•	alteration of Lock::Release()
+			- the first one of the pair (lock, thread) to be notified of the freed ties between them is the lock itself.
+			- now that the lock is free it can be acquired by any other thread.
+			- as for the thread it is appended to the ready queue.
+			- interrupt disabling and enabling is important specifically inside the loop because if the current thread is not removed from the queue then no other thread can get ahold of the lock
+	
+
+
+=============================================
+==================Problem 4==================
+=============================================
+
+	Code Edited:
+	thread.cc
+	thread.h
+
+	Bullet Points:
+
+	in Thread.h
+	•	introduction of method Join()
+	•	intruduction of attributes joinCalled (to determine if join was called), joinAllow 
+	    (to determine if the join should be allowed) and joinFrom (the parent thread)
+
+	in Thread.cc
+	•	alteration of Thread::Thread
+    		- joinAllow is set to true, initially a join may be requested
+    		- joinCalled is set to false, initially a join is not assumed to have been requested
+	•	alteration of Thread::Finish
+			- a parent can go to sleep, but must be awoken as soon as a child requests a join. 
+			- a parent cannot terminate until all joins are made and there are no further legitimate joins
+			- as stated before, Thread::Sleep assumes interrupt disabling
+			- if the join is called, the scheduler places the parent thread in the ready queue
+
+	•	introduction of Thread::Join
+			- an if-statement that checks the ligitimacy of the thread calling the join, if they're authorized to actually do so.
+			- the parent is chosen and then set to (momentary) sleep
+			- this sleep operation must preserve atomicity, therefore interrupts are enabled and disabled around it.
+
