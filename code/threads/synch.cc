@@ -44,12 +44,15 @@
 //      "initialValue" is the initial value of the semaphore.
 //----------------------------------------------------------------------
 
+Lock *lock;
+Condition *condition;
+
 Semaphore::Semaphore(char* debugName, int initialValue)
 {
     name = debugName;
     value = initialValue;
-    Lock *lock = new Lock("aLock");
-    Condition *condition = new Condition("aCond");
+    lock = new Lock("aLock");
+    condition = new Condition("aCond");
     // queue = new List<Thread *>;
 }
 
