@@ -83,7 +83,7 @@ Semaphore::P()
 
     lock->Acquire();
     if (value <= 0) {
-        condition->Wait(Lock);
+        condition->Wait(lock);
     } else {
        value--;
     }
@@ -123,7 +123,7 @@ Semaphore::V()
 
     lock->Acquire();
     value++;
-    condition->Signal(aLock);
+    condition->Signal(lock);
     lock->Release();
 
     // Interrupt *interrupt = kernel->interrupt;
