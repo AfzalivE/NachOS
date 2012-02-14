@@ -78,14 +78,14 @@ void
 Semaphore::P()
 {
 
-    aLock->Acquire();
+    lock->Acquire();
     if (value <= 0) {
-        aCond->Wait(Lock);
+        condition->Wait(Lock);
     } else {
        value--;
     }
 
-    aLock->Release();
+    lock->Release();
 
     // Interrupt *interrupt = kernel->interrupt;
     // Thread *currentThread = kernel->currentThread;
@@ -103,8 +103,8 @@ Semaphore::P()
     // }
    
     // re-enable interrupts
-    (void) interrupt->SetLevel(oldLevel);        
-}
+//     (void) interrupt->SetLevel(oldLevel);        
+// }
 
 //----------------------------------------------------------------------
 // Semaphore::V
@@ -118,10 +118,10 @@ void
 Semaphore::V()
 {
 
-    aLock->Acquire();
+    lock->Acquire();
     value++;
-    aCond->Signal(aLock);
-    aLock->Release();
+    condition->Signal(aLock);
+    lock->Release();
 
     // Interrupt *interrupt = kernel->interrupt;
     
