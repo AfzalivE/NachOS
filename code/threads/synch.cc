@@ -210,6 +210,8 @@ void Lock::Acquire()
 //      for the lock, if any.
 //      Equivalent to Semaphore::V(), with the semaphore value of 0
 //      equal to busy, and semaphore value of 1 equal to free.
+//      
+//      Using condition variables. // Q2_CHANGE
 //
 //      By convention, only the thread that acquired the lock
 //      may release it.
