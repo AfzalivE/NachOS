@@ -19,40 +19,6 @@
 #include "list.h"
 #include "main.h"
 
-// The following class defines a "semaphore" whose value is a non-negative
-// integer.  The semaphore has only two operations P() and V():
-//
-//      P() -- waits until value > 0, then decrement
-//
-//      V() -- increment, waking up a thread waiting in P() if necessary
-// 
-// Note that the interface does *not* allow a thread to read the value of 
-// the semaphore directly -- even if you did read the value, the
-// only thing you would know is what the value used to be.  You don't
-// know what the value is now, because by the time you get the value
-// into a register, a context switch might have occurred,
-// and some other thread might have called P or V, so the true value might
-// now be different.
-
-class Semaphore {
-  public:
-    Semaphore(char* debugName, int initialValue);  // set initial value
-    ~Semaphore();                                  // de-allocate semaphore
-    char* getName() { return name;}                // debugging assist
-    
-    void P();            // these are the only operations on a semaphore
-    void V();            // they are both *atomic*
-    void SelfTest();     // test routine for semaphore implementation
-    
-  private:
-    char* name;          // useful for debugging
-    int value;           // semaphore value, always >= 0
-    // List<Thread *> *queue; // list of threads 
-    Lock *lock;
-    Condition *condition;
-                         // threads waiting in P() for the value to be > 0
-   };
-
 // The following class defines a "lock".  A lock can be BUSY or FREE.
 // There are only two operations allowed on a lock: 
 //
@@ -146,4 +112,40 @@ class Condition {
     List<Thread *> *waitQueue;          // List of threads to sleep/wake // Q2_CHANGE
     // List<Semaphore *> *waitQueue;       // list of waiting threads
 };
+
+// The following class defines a "semaphore" whose value is a non-negative
+// integer.  The semaphore has only two operations P() and V():
+//
+//      P() -- waits until value > 0, then decrement
+//
+//      V() -- increment, waking up a thread waiting in P() if necessary
+// 
+// Note that the interface does *not* allow a thread to read the value of 
+// the semaphore directly -- even if you did read the value, the
+// only thing you would know is what the value used to be.  You don't
+// know what the value is now, because by the time you get the value
+// into a register, a context switch might have occurred,
+// and some other thread might have called P or V, so the true value might
+// now be different.
+
+class Semaphore {
+  public:
+    Semaphore(char* debugName, int initialValue);  // set initial value
+    ~Semaphore();                                  // de-allocate semaphore
+    char* getName() { return name;}                // debugging assist
+    
+    void P();            // these are the only operations on a semaphore
+    void V();            // they are both *atomic*
+    void SelfTest();     // test routine for semaphore implementation
+    
+  private:
+    char* name;          // useful for debugging
+    int value;           // semaphore value, always >= 0
+    // List<Thread *> *queue; // list of threads 
+    Lock *lock;
+    Condition *condition;
+                         // threads waiting in P() for the value to be > 0
+   };
+
+
 #endif // SYNCH_H
