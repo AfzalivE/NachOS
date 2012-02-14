@@ -36,7 +36,7 @@ const int STACK_FENCEPOST = 0xdedbeef;
 Thread::Thread(char* threadName, bool joinMayBeCalled)
 {
     name = threadName;
-    joinAllow = joinMayBeCalled;
+    joinAllow = joinMayBeCalled;  // Q4_CHANGE
     stackTop = NULL;
     stack = NULL;
     waketime = 0;
@@ -169,6 +169,8 @@ Thread::Begin ()
 //      and we're still on the stack!  Instead, we tell the scheduler
 //      to call the destructor, once it is running in the context of a 
 //      different thread.
+//      
+//      If join was called, then mark the parent thread to wake.
 //
 //      NOTE: we disable interrupts, because Sleep() assumes interrupts
 //      are disabled.
@@ -445,11 +447,17 @@ Thread::SelfTest()
     Thread *t = new Thread("forked thread", true);
 
     t->Fork((VoidFunctionPtr) SimpleThread, (void *) 1);
-    t->Join();
-    // kernel->currentThread->Yield();
+    t->Join(); // Join child thread // Q4_CHANGE
+    // kernel->currentThread->Yield(); // Q4_CHANGE
     DEBUG(dbgThread, "test");    
     SimpleThread(0);
 }
+
+//----------------------------------------------------------------------
+// Thread::Join
+//  If joining is allowed, set join called flag to true. Put parent 
+//  thread to sleep. // Q4_CHANGE
+//----------------------------------------------------------------------
 
 void Thread::Join() {
     if (joinAllow) {

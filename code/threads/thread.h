@@ -82,7 +82,9 @@ class Thread {
     void *machineState[MachineStateSize];
                                         // all registers except for stackTop
   public:
-    Thread(char* debugName, bool joinMayBeCalled = true);            // initialize a Thread 
+    Thread(char* debugName, bool joinMayBeCalled = true); // initialize a Thread
+                                                          // with joinMayBeCalled = true
+                                                          // if not specified otherwise // Q4_CHANGE
     ~Thread();                          // deallocate a Thread
                                         // NOTE -- thread being deleted
                                         // must not be running when delete 
@@ -101,10 +103,10 @@ class Thread {
     
     void Join();
 
-    bool joinCalled;
-    bool joinAllow;
+    bool joinCalled;                    // bool to determine if join was called // Q4_CHANGE
+    bool joinAllow;                     // bool to determine if the join should be allowed // Q4_CHANGE
     
-    Thread *joinFrom;                   // Parent thread
+    Thread *joinFrom;                   // Parent thread // Q4_CHANGE
 
     void CheckOverflow();               // Check if thread stack has 
                                         // overflowed
