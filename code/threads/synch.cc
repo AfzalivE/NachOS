@@ -48,7 +48,9 @@ Semaphore::Semaphore(char* debugName, int initialValue)
 {
     name = debugName;
     value = initialValue;
-    queue = new List<Thread *>;
+    lock = new Lock("aLock");
+    condition = new Condition("aCond");
+    // queue = new List<Thread *>;
 }
 
 //----------------------------------------------------------------------
@@ -59,7 +61,7 @@ Semaphore::Semaphore(char* debugName, int initialValue)
 
 Semaphore::~Semaphore()
 {
-    delete queue;
+    // delete queue;
 }
 
 //----------------------------------------------------------------------
@@ -75,20 +77,29 @@ Semaphore::~Semaphore()
 void
 Semaphore::P()
 {
-    Interrupt *interrupt = kernel->interrupt;
-    Thread *currentThread = kernel->currentThread;
-    
-    // disable interrupts
-    IntStatus oldLevel = interrupt->SetLevel(IntOff);        
-    
-    if(value <= 0) {                    // semaphore not available
-        queue->Append(currentThread);   // so go to sleep
-        currentThread->Sleep(FALSE);
-        // Thread that woke this thread has decremented value already
-        // for this thread
-    } else {
-        value--;            // semaphore available, consume its value
+
+    aLock->Acquire();
+    while (value <= 0) {
+        aCond->Wait(Lock);
     }
+    value--;
+
+    aLock->Release();
+
+    // Interrupt *interrupt = kernel->interrupt;
+    // Thread *currentThread = kernel->currentThread;
+    
+    // // disable interrupts
+    // IntStatus oldLevel = interrupt->SetLevel(IntOff);        
+    
+    // if(value <= 0) {                    // semaphore not available
+    //     queue->Append(currentThread);   // so go to sleep
+    //     currentThread->Sleep(FALSE);
+    //     // Thread that woke this thread has decremented value already
+    //     // for this thread
+    // } else {
+    //     value--;            // semaphore available, consume its value
+    // }
    
     // re-enable interrupts
     (void) interrupt->SetLevel(oldLevel);        
@@ -105,22 +116,28 @@ Semaphore::P()
 void
 Semaphore::V()
 {
-    Interrupt *interrupt = kernel->interrupt;
-    
-    // disable interrupts
-    IntStatus oldLevel = interrupt->SetLevel(IntOff);        
-    
-    if (!queue->IsEmpty()) {  // make thread ready.
-        // There's somebody ready to run, thus they will be given
-        // possession of the semaphore 
-        kernel->scheduler->ReadyToRun(queue->RemoveFront());
 
-    }else {
-        value++;
-    }
+    aLock->Acquire();
+    value++;
+    aCond->Signal(aLock);
+    aLock->Release();
+
+    // Interrupt *interrupt = kernel->interrupt;
     
-    // re-enable interrupts
-    (void) interrupt->SetLevel(oldLevel);
+    // // disable interrupts
+    // IntStatus oldLevel = interrupt->SetLevel(IntOff);        
+    
+    // if (!queue->IsEmpty()) {  // make thread ready.
+    //     // There's somebody ready to run, thus they will be given
+    //     // possession of the semaphore 
+    //     kernel->scheduler->ReadyToRun(queue->RemoveFront());
+
+    // }else {
+    //     value++;
+    // }
+    
+    // // re-enable interrupts
+    // (void) interrupt->SetLevel(oldLevel);
 }
 
 //----------------------------------------------------------------------

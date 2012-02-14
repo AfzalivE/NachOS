@@ -83,7 +83,9 @@ class Lock {
     char *name;              // debugging assist
     Thread *lockHolder;      // thread currently holding lock
 
-    List<Thread *> *queue;  // list of threads
+    // List<Thread *> *queue;  // list of threads
+    Lock *lock;
+    Condition *condition;
     bool value;             // Condition variable: lock value
 };
 
