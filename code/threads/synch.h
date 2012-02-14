@@ -47,8 +47,6 @@ class Semaphore {
   private:
     char* name;          // useful for debugging
     int value;           // semaphore value, always >= 0
-    List<Thread *> *queue; // list of threads 
-                         // threads waiting in P() for the value to be > 0
    };
 
 // The following class defines a "lock".  A lock can be BUSY or FREE.
@@ -84,6 +82,7 @@ class Lock {
     Thread *lockHolder;      // thread currently holding lock
 
     List<Thread *> *queue;  // list of threads
+
     bool value;             // Condition variable: lock value
 };
 
