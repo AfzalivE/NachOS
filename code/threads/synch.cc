@@ -42,10 +42,12 @@
 //
 //      "debugName" is an arbitrary name, useful for debugging.
 //      "initialValue" is the initial value of the semaphore.
+//      "lock" is a new lock element
+//      "condition" is a new condition element
 //----------------------------------------------------------------------
 
-Lock *lock;
-Condition *condition;
+Lock *lock;             // Q3_CHANGE
+Condition *condition;   // Q3_CHANGE
 
 Semaphore::Semaphore(char* debugName, int initialValue)
 {
@@ -53,7 +55,6 @@ Semaphore::Semaphore(char* debugName, int initialValue)
     value = initialValue;
     lock = new Lock("aLock");
     condition = new Condition("aCond");
-    // queue = new List<Thread *>;
 }
 
 //----------------------------------------------------------------------
@@ -64,17 +65,13 @@ Semaphore::Semaphore(char* debugName, int initialValue)
 
 Semaphore::~Semaphore()
 {
-    // delete queue;
+    // delete queue;        // Q3_CHANGE
 }
 
 //----------------------------------------------------------------------
 // Semaphore::P
-//      Wait until semaphore value > 0, then decrement.  Checking the
-//      value and decrementing must be done atomically, so we
-//      need to disable interrupts before checking the value.
-//
-//      Note that Thread::Sleep assumes that interrupts are disabled
-//      when it is called.
+//      Acquire lock, if value <= 0 then put thread to sleep,
+//      otherwise decrement the value and release lock;
 //----------------------------------------------------------------------
 
 void
@@ -89,32 +86,12 @@ Semaphore::P()
     }
 
     lock->Release();
-
-    // Interrupt *interrupt = kernel->interrupt;
-    // Thread *currentThread = kernel->currentThread;
-    
-    // // disable interrupts
-    // IntStatus oldLevel = interrupt->SetLevel(IntOff);        
-    
-    // if(value <= 0) {                    // semaphore not available
-    //     queue->Append(currentThread);   // so go to sleep
-    //     currentThread->Sleep(FALSE);
-    //     // Thread that woke this thread has decremented value already
-    //     // for this thread
-    // } else {
-    //     value--;            // semaphore available, consume its value
-    // }
-   
-    // re-enable interrupts
-//     (void) interrupt->SetLevel(oldLevel);        
+       
 }
 
 //----------------------------------------------------------------------
 // Semaphore::V
-//      Increment semaphore value, waking up a waiter if necessary.
-//      As with P(), this operation must be atomic, so we need to disable
-//      interrupts.  Scheduler::ReadyToRun() assumes that interrupts
-//      are disabled when it is called.
+//      Acquire lock, increment value, wake up the thread, release lock
 //----------------------------------------------------------------------
 
 void
@@ -126,22 +103,6 @@ Semaphore::V()
     condition->Signal(lock);
     lock->Release();
 
-    // Interrupt *interrupt = kernel->interrupt;
-    
-    // // disable interrupts
-    // IntStatus oldLevel = interrupt->SetLevel(IntOff);        
-    
-    // if (!queue->IsEmpty()) {  // make thread ready.
-    //     // There's somebody ready to run, thus they will be given
-    //     // possession of the semaphore 
-    //     kernel->scheduler->ReadyToRun(queue->RemoveFront());
-
-    // }else {
-    //     value++;
-    // }
-    
-    // // re-enable interrupts
-    // (void) interrupt->SetLevel(oldLevel);
 }
 
 //----------------------------------------------------------------------
