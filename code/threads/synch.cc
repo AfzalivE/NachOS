@@ -107,7 +107,7 @@ Semaphore::P()
    
     // re-enable interrupts
 //     (void) interrupt->SetLevel(oldLevel);        
-// }
+}
 
 //----------------------------------------------------------------------
 // Semaphore::V
