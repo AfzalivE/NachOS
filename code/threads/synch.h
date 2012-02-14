@@ -47,7 +47,7 @@ class Semaphore {
   private:
     char* name;          // useful for debugging
     int value;           // semaphore value, always >= 0
-    List<Thread *> *queue;     
+    List<Thread *> *queue; // list of threads 
                          // threads waiting in P() for the value to be > 0
    };
 
@@ -141,7 +141,7 @@ class Condition {
 
   private:
     char* name;
-    List<Thread *> *waitQueue;
+    List<Thread *> *waitQueue;          // List of threads to sleep/wake // Q2_CHANGE
     // List<Semaphore *> *waitQueue;       // list of waiting threads
 };
 #endif // SYNCH_H
