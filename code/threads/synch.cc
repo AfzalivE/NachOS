@@ -48,8 +48,8 @@ Semaphore::Semaphore(char* debugName, int initialValue)
 {
     name = debugName;
     value = initialValue;
-    lock = new Lock("aLock");
-    condition = new Condition("aCond");
+    Lock lock = new Lock("aLock");
+    Condition condition = new Condition("aCond");
     // queue = new List<Thread *>;
 }
 
