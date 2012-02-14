@@ -79,10 +79,11 @@ Semaphore::P()
 {
 
     aLock->Acquire();
-    while (value <= 0) {
+    if (value <= 0) {
         aCond->Wait(Lock);
+    } else {
+       value--;
     }
-    value--;
 
     aLock->Release();
 
