@@ -74,13 +74,13 @@ ExceptionHandler(ExceptionType which)
 		if(AddrSpace->ipt[i]->vPage == vpn && AddrSpace->ipt[i]->Process_Id == kernel->currentThread->space)
 		{
 		IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff); //interrupt disable
-		kernel->machine->tlb[whichTLBPage].virtualPage = ipt[i].vPage;
-		kernel->machine->tlb[whichTLBPage].physicalPage = ipt[i].pPage;
+		kernel->machine->tlb[whichTLBPage].virtualPage = AddrSpace->ipt[i].vPage;
+		kernel->machine->tlb[whichTLBPage].physicalPage = AddrSpace->ipt[i].pPage;
 		kernel->machine->tlb[whichTLBPage].valid = TRUE;
 		kernel->machine->tlb[whichTLBPage].use = FALSE;
 		kernel->machine->tlb[whichTLBPage].dirty = FALSE;
 		kernel->machine->tlb[whichTLBPage].readOnly = FALSE;
-		whichTLBPage = (whichTLBPage + 1)%TLBSize;
+		whichTLBPage = (whichTLBPage + 1) % TLBSize;
 		(void) kernel->interrupt->SetLevel(oldlevel); //interrupt enable
 		}
 		}
