@@ -14,7 +14,6 @@
 
 extern Kernel *kernel;
 extern Debug *debug;
-int whichTLBPage;
 
 #endif
 
