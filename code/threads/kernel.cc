@@ -18,9 +18,6 @@
 #include "synchdisk.h"
 #include "post.h"
 
-   //new
-whichTLBPage = 0;
-
 //----------------------------------------------------------------------
 // Kernel::Kernel
 //      Interpret command line arguments in order to determine flags 
@@ -29,6 +26,8 @@ whichTLBPage = 0;
 
 Kernel::Kernel(int argc, char **argv)
 {
+    //new
+    whichTLBPage = 0;
     randomSlice = FALSE; 
     debugUserProg = FALSE;
     consoleIn = NULL;          // default is stdin

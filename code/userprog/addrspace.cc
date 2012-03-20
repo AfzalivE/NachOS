@@ -244,13 +244,13 @@ void AddrSpace::RestoreState() {
     kernel->machine->pageTableSize = numPages;
     if(kernel->currentThread->space != scheduler->oldThread2->space) {
         for (int i = 0; i < (signed)NumPhysPages; i++) {
-        	ipt[i].vPage = machine->tlb[kernel->whichTLBPage].virtualPage;
-        	ipt[i].pPage = machine->tlb[kernel->whichTLBPage].physicalPage;
-        	ipt[i].valid = machine->tlb[kernel->whichTLBPage].valid;
-        	ipt[i].use = machine->tlb[kernel->whichTLBPage].use;
-        	ipt[i].dirty = machine->tlb[kernel->whichTLBPage].dirty;
-        	ipt[i].replacing = machine->tlb[kernel->whichTLBPage].readOnly;
-        	tlb[i].valid = FALSE;
+        	IptEntry->ipt[i].vPage = machine->tlb[kernel->whichTLBPage].virtualPage;
+        	IptEntry->ipt[i].pPage = machine->tlb[kernel->whichTLBPage].physicalPage;
+        	IptEntry->ipt[i].valid = machine->tlb[kernel->whichTLBPage].valid;
+        	IptEntry->ipt[i].use = machine->tlb[kernel->whichTLBPage].use;
+        	IptEntry->ipt[i].dirty = machine->tlb[kernel->whichTLBPage].dirty;
+        	IptEntry->ipt[i].replacing = machine->tlb[kernel->whichTLBPage].readOnly;
+        	machine->tlb[i].valid = FALSE;
         }
 	}
 }
