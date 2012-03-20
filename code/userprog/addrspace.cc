@@ -242,7 +242,7 @@ void AddrSpace::SaveState()
 void AddrSpace::RestoreState() {
     //kernel->machine->pageTable = pageTable;
     kernel->machine->pageTableSize = numPages;
-    if(kernel->currentThread->space != scheduler->oldThread1->space) {
+    if(kernel->currentThread->space != scheduler->oldThread2->space) {
         for (int i = 0; i < (signed)NumPhysPages; i++) {
         	ipt[i].vPage = kernel->tlb[whichTLBPage].virtualPage;
         	ipt[i].pPage = kernel->tlb[whichTLBPage].physicalPage;
