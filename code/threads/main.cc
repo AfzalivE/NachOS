@@ -49,6 +49,7 @@
 // global variables
 Kernel *kernel;
 Debug *debug;
+whichTLBPage = 0;
 
 
 //----------------------------------------------------------------------

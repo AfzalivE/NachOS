@@ -25,8 +25,6 @@ class SynchConsoleInput;
 class SynchConsoleOutput;
 class SynchDisk;
 
-#define whichTLBPage 0
-
 class Kernel {
   public:
     Kernel(int argc, char **argv);
@@ -60,6 +58,7 @@ class Kernel {
     PostOfficeOutput *postOfficeOut;
     //
     IptEntry *ipt;
+    int whichTLBPage;
 
     int hostName;              // machine identifier
 
