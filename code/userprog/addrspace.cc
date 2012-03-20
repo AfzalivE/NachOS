@@ -19,6 +19,7 @@
 #include "main.h"
 #include "addrspace.h"
 #include "machine.h"
+
 #include "noff.h"
 
 //----------------------------------------------------------------------
@@ -65,17 +66,32 @@ AddrSpace::AddrSpace()
     
     // zero out the entire address space
     bzero(kernel->machine->mainMemory, MemorySize);
+    
 }
+
+//----------------------------------------------------------------------
+
 
 //----------------------------------------------------------------------
 // AddrSpace::~AddrSpace
 //      Dealloate an address space.
 //----------------------------------------------------------------------
 
-AddrSpace::~AddrSpace()
-{
+AddrSpace::~AddrSpace() {
    delete pageTable;
 }
+
+IptEntry::IptEntry() {
+kernel->ipt = new IptEntry[NumPhysPages];
+	for (int i = 0; i < NumPhysPages; i++) {
+	   kernel->ipt[i].valid = FALSE;
+	}
+}
+
+IptEntry::~IptEntry() {
+    delete kernel->ipt;
+}
+
 
 
 //----------------------------------------------------------------------
@@ -224,8 +240,18 @@ void AddrSpace::SaveState()
 //      For now, tell the machine where to find the page table.
 //----------------------------------------------------------------------
 
-void AddrSpace::RestoreState() 
-{
-    kernel->machine->pageTable = pageTable;
+void AddrSpace::RestoreState() {
+    //kernel->machine->pageTable = pageTable;
     kernel->machine->pageTableSize = numPages;
+    if(kernel->currentThread->space != kernel->scheduler->oldThread2->space) {
+        for (int i = 0; i < (signed)NumPhysPages; i++) {
+        	kernel->ipt[i].vPage = kernel->machine->tlb[kernel->whichTLBPage].virtualPage;
+        	kernel->ipt[i].pPage = kernel->machine->tlb[kernel->whichTLBPage].physicalPage;
+        	kernel->ipt[i].valid = kernel->machine->tlb[kernel->whichTLBPage].valid;
+        	kernel->ipt[i].use = kernel->machine->tlb[kernel->whichTLBPage].use;
+        	kernel->ipt[i].dirty = kernel->machine->tlb[kernel->whichTLBPage].dirty;
+        	kernel->ipt[i].replacing = kernel->machine->tlb[kernel->whichTLBPage].readOnly;
+        	kernel->machine->tlb[i].valid = FALSE;
+        }
+	}
 }

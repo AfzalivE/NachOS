@@ -26,6 +26,7 @@
 
 Kernel::Kernel(int argc, char **argv)
 {
+    whichTLBPage = 0;
     randomSlice = FALSE; 
     debugUserProg = FALSE;
     consoleIn = NULL;          // default is stdin
@@ -113,6 +114,8 @@ Kernel::Initialize()
 #endif // FILESYS_STUB
     postOfficeIn = new PostOfficeInput(10);
     postOfficeOut = new PostOfficeOutput(reliability);
+    //
+//    ipt = new IptEntry[NumPhysPages];
 
     interrupt->Enable();
 }
@@ -135,7 +138,7 @@ Kernel::~Kernel()
     delete fileSystem;
     delete postOfficeIn;
     delete postOfficeOut;
-    
+
     Exit(0);
 }
 

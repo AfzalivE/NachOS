@@ -56,6 +56,9 @@ class Kernel {
     FileSystem *fileSystem;     
     PostOfficeInput *postOfficeIn;
     PostOfficeOutput *postOfficeOut;
+    //
+    IptEntry *ipt;
+    int whichTLBPage;
 
     int hostName;              // machine identifier
 

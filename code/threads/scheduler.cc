@@ -22,6 +22,7 @@
 #include "debug.h"
 #include "scheduler.h"
 #include "main.h"
+//
 
 //----------------------------------------------------------------------
 // Scheduler::Scheduler
@@ -57,6 +58,7 @@ void
 Scheduler::ReadyToRun (Thread *thread)
 {
     ASSERT(kernel->interrupt->getLevel() == IntOff);
+    oldThread2 = kernel->currentThread;
     DEBUG(dbgThread, "Putting thread on ready list: " << thread->getName());
 
     thread->setStatus(READY);
