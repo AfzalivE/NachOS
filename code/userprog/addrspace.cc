@@ -242,13 +242,13 @@ void AddrSpace::SaveState()
 void AddrSpace::RestoreState() {
     //kernel->machine->pageTable = pageTable;
     kernel->machine->pageTableSize = numPages;
-    if(kernel->currentThread->space != oldThread->space) {
-    	ipt[i].vPage = tlb[whichTLBPage].virtualPage;
-    	ipt[i].pPage = tlb[whichTLBPage].physicalPage;
-    	ipt[i].valid = tlb[whichTLBPage].valid;
-    	ipt[i].use = tlb[whichTLBPage].use;
-    	ipt[i].dirty = tlb[whichTLBPage].dirty;
-    	ipt[i].replacing = tlb[whichTLBPage].readOnly;
+    if(kernel->currentThread->space != scheduler->oldThread->space) {
+    	ipt[i].vPage = kernel->tlb[whichTLBPage].virtualPage;
+    	ipt[i].pPage = kernel->tlb[whichTLBPage].physicalPage;
+    	ipt[i].valid = kernel->tlb[whichTLBPage].valid;
+    	ipt[i].use = kernel->tlb[whichTLBPage].use;
+    	ipt[i].dirty = kernel->tlb[whichTLBPage].dirty;
+    	ipt[i].replacing = kernel->tlb[whichTLBPage].readOnly;
     	tlb[i].valid = FALSE;
 	}
 }
