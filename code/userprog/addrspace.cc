@@ -22,7 +22,7 @@
 
 #include "noff.h"
 
-IptEntry *ipt;
+//IptEntry *ipt;
 //----------------------------------------------------------------------
 // SwapHeader
 //      Do little endian to big endian conversion on the bytes in the 
