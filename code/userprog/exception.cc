@@ -24,7 +24,6 @@
 #include "copyright.h"
 #include "main.h"
 #include "syscall.h"
-#include "addrspace.h"
 
 //----------------------------------------------------------------------
 // ExceptionHandler
