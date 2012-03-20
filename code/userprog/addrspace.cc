@@ -84,7 +84,7 @@ AddrSpace::~AddrSpace() {
 IptEntry::IptEntry() {
 kernel->ipt = new IptEntry[NumPhysPages];
 	for (int i = 0; i < NumPhysPages; i++) {
-	   kernel->ipt[i]->valid = FALSE;
+	   kernel->ipt[i].valid = FALSE;
 	}
 }
 
