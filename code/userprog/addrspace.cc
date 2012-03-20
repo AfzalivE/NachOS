@@ -22,7 +22,6 @@
 
 #include "noff.h"
 
-//IptEntry *ipt;
 //----------------------------------------------------------------------
 // SwapHeader
 //      Do little endian to big endian conversion on the bytes in the 
@@ -83,6 +82,7 @@ AddrSpace::~AddrSpace() {
 }
 
 IptEntry::IptEntry() {
+IptEntry *ipt;
 ipt = new IptEntry[NumPhysPages];
 	for (int i = 0; i < NumPhysPages; i++) {
 	   ipt[i].valid = FALSE;
