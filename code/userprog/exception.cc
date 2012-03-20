@@ -82,7 +82,7 @@ ExceptionHandler(ExceptionType which)
 				(void) kernel->interrupt->SetLevel(oldlevel); //interrupt enable
 			}
 		}
-		machine->WriteRegister(NextPCReg, PCReg);
+		kernel->machine->WriteRegister(NextPCReg, PCReg);
 		break;
 
         default:
