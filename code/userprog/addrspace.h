@@ -59,6 +59,6 @@ class IptEntry {
         AddrSpace *Process_Id;
         bool use;
         bool replacing;
-};
+}; 
 
 #endif // ADDRSPACE_H

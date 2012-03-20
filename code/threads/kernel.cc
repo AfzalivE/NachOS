@@ -115,7 +115,7 @@ Kernel::Initialize()
     postOfficeIn = new PostOfficeInput(10);
     postOfficeOut = new PostOfficeOutput(reliability);
     //
-    ipt = new IptEntry[NumPhysPages];
+//    ipt = new IptEntry[NumPhysPages];
 
     interrupt->Enable();
 }
@@ -138,7 +138,7 @@ Kernel::~Kernel()
     delete fileSystem;
     delete postOfficeIn;
     delete postOfficeOut;
-    
+
     Exit(0);
 }
 
