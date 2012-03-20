@@ -19,6 +19,7 @@
 #include "main.h"
 #include "addrspace.h"
 #include "machine.h"
+
 #include "noff.h"
 
 //----------------------------------------------------------------------
@@ -242,15 +243,15 @@ void AddrSpace::SaveState()
 void AddrSpace::RestoreState() {
     //kernel->machine->pageTable = pageTable;
     kernel->machine->pageTableSize = numPages;
-    if(kernel->currentThread->space != scheduler->oldThread2->space) {
+    if(kernel->currentThread->space != kernel->scheduler->oldThread2->space) {
         for (int i = 0; i < (signed)NumPhysPages; i++) {
-        	IptEntry->ipt[i].vPage = machine->tlb[kernel->whichTLBPage].virtualPage;
+        	IptEntry.ipt[i].vPage = machine->tlb[kernel->whichTLBPage].virtualPage;
         	IptEntry->ipt[i].pPage = machine->tlb[kernel->whichTLBPage].physicalPage;
         	IptEntry->ipt[i].valid = machine->tlb[kernel->whichTLBPage].valid;
         	IptEntry->ipt[i].use = machine->tlb[kernel->whichTLBPage].use;
         	IptEntry->ipt[i].dirty = machine->tlb[kernel->whichTLBPage].dirty;
         	IptEntry->ipt[i].replacing = machine->tlb[kernel->whichTLBPage].readOnly;
-        	machine->tlb[i].valid = FALSE;
+        	kernel->machine->tlb[i].valid = FALSE;
         }
 	}
 }
