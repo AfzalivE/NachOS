@@ -71,11 +71,11 @@ ExceptionHandler(ExceptionType which)
 		int virtAddr = kernel->machine->ReadRegister(39);
 		unsigned int vpn = (unsigned) virtAddr/PageSize;
 		for(int i=0; i < NumPhysPages; i++) 		{
-		if(AddrSpace->ipt[i]->vPage == vpn && AddrSpace->ipt[i]->Process_Id == kernel->currentThread->space)
+		if(ipt[i]->vPage == vpn && ipt[i]->Process_Id == kernel->currentThread->space)
 		{
 		IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff); //interrupt disable
-		kernel->machine->tlb[whichTLBPage].virtualPage = AddrSpace->ipt[i].vPage;
-		kernel->machine->tlb[whichTLBPage].physicalPage = AddrSpace->ipt[i].pPage;
+		kernel->machine->tlb[whichTLBPage].virtualPage = ipt[i].vPage;
+		kernel->machine->tlb[whichTLBPage].physicalPage = ipt[i].pPage;
 		kernel->machine->tlb[whichTLBPage].valid = TRUE;
 		kernel->machine->tlb[whichTLBPage].use = FALSE;
 		kernel->machine->tlb[whichTLBPage].dirty = FALSE;
