@@ -59,8 +59,6 @@ public:
     AddrSpace *Process_Id;
     bool use;
     bool replacing;
-
-private:
     IptEntry *ipt;
 };
 

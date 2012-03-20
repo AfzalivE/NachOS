@@ -239,8 +239,7 @@ void AddrSpace::SaveState()
 //      For now, tell the machine where to find the page table.
 //----------------------------------------------------------------------
 
-void AddrSpace::RestoreState() 
-{
+void AddrSpace::RestoreState() {
     //kernel->machine->pageTable = pageTable;
     kernel->machine->pageTableSize = numPages;
     if(kernel->currentThread->space != oldThread->space) {
