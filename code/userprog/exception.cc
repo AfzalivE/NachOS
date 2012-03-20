@@ -79,7 +79,7 @@ ExceptionHandler(ExceptionType which)
 		kernel->machine->tlb[whichTLBPage].use = FALSE;
 		kernel->machine->tlb[whichTLBPage].dirty = FALSE;
 		kernel->machine->tlb[whichTLBPage].readOnly = FALSE;
-		whichTLBPage = (whichTLBPage + 1) % TLBSize;
+		whichTLBPage = whichTLBPage;
 		(void) kernel->interrupt->SetLevel(oldlevel); //interrupt enable
 		}
 		}
