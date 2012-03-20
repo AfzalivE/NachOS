@@ -17,7 +17,6 @@
 #include "filesys.h"
 
 #define UserStackSize      1024         // increase this as necessary!
-IptEntry *ipt;
 
 class AddrSpace {
   public:
