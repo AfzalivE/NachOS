@@ -82,7 +82,7 @@ ExceptionHandler(ExceptionType which)
 				(void) kernel->interrupt->SetLevel(oldlevel); //interrupt enable
 			}
 		}
-		kernel->machine->PCReg = PrevPCReg;
+		registers[PCReg] = registers[PrevPCReg];
 		break;
 
         default:
