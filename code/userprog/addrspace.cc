@@ -76,24 +76,19 @@ AddrSpace::AddrSpace()
 //      Dealloate an address space.
 //----------------------------------------------------------------------
 
-AddrSpace::~AddrSpace()
-{
+AddrSpace::~AddrSpace() {
    delete pageTable;
 }
 
-IptEntry::IptEntry()
-{
-IptEntry *ipt;
+IptEntry::IptEntry() {
 ipt = new IptEntry[NumPhysPages];
-	for (i = 0; i < NumPhysPages; i++)
-	{
-	ipt[i].valid = FALSE;
+	for (int i = 0; i < NumPhysPages; i++) {
+	   ipt[i].valid = FALSE;
 	}
 }
 
-IptEntry::~IptEntry()
-{
-delete ipt;
+IptEntry::~IptEntry() {
+    delete ipt;
 }
 
 

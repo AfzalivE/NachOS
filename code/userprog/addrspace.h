@@ -50,15 +50,18 @@ class AddrSpace {
 
 class IptEntry {
 public:
-IptEntry();
-~IptEntry();
-int vPage;
-int pPage;
-bool valid;
-bool dirty;
-AddrSpace *Process_Id;
-bool use;
-bool replacing;
+    IptEntry();
+    ~IptEntry();
+    int vPage;
+    int pPage;
+    bool valid;
+    bool dirty;
+    AddrSpace *Process_Id;
+    bool use;
+    bool replacing;
+
+private:
+    IptEntry *ipt;
 };
 
 #endif // ADDRSPACE_H
