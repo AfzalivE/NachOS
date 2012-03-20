@@ -69,7 +69,7 @@ ExceptionHandler(ExceptionType which)
 	case PageFaultException:
 		int virtAddr = kernel->machine->ReadRegister(39);
 		unsigned int vpn = (unsigned) virtAddr/PageSize;
-		for(int i=0; i<NumPhyPages; i++)
+		for(int i=0; i < kernel->machine->NumPhyPages; i++)
 		{
 		if(ipt[i]->vPage == vpn && ipt[i]->Process_Id == kernel->currentThread->space)
 		{

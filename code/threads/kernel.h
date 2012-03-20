@@ -26,6 +26,7 @@ class SynchConsoleOutput;
 class SynchDisk;
 
 #define whichTLBPage 0
+
 class Kernel {
   public:
     Kernel(int argc, char **argv);
