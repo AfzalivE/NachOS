@@ -24,7 +24,6 @@
 #include "main.h"
 //
 
-oldThread = kernel->currentThread;
 //----------------------------------------------------------------------
 // Scheduler::Scheduler
 //      Initialize the list of ready but not running threads.
@@ -59,6 +58,7 @@ void
 Scheduler::ReadyToRun (Thread *thread)
 {
     ASSERT(kernel->interrupt->getLevel() == IntOff);
+    oldThread1 = kernel->currentThread;
     DEBUG(dbgThread, "Putting thread on ready list: " << thread->getName());
 
     thread->setStatus(READY);

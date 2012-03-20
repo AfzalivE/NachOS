@@ -32,7 +32,7 @@ class Scheduler {
                                  // running needs to be deleted
     void Print();                // Print contents of ready list
 
-    Thread *oldThread;
+    Thread *oldThread2;
     
     // SelfTest for scheduler is implemented in class Thread
     
