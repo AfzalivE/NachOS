@@ -246,6 +246,8 @@ void AddrSpace::RestoreState() {
     kernel->machine->pageTableSize = numPages;
     if(kernel->currentThread->space != kernel->scheduler->oldThread2->space) {
         for (int i = 0; i < (signed)NumPhysPages; i++) {
+            DEBUG(dbgAddr, kernel->whichTLBPage);
+
         	ipt[i].vPage = kernel->machine->tlb[whichTLBPage].virtualPage;
         	ipt[i].pPage = kernel->machine->tlb[whichTLBPage].physicalPage;
         	ipt[i].valid = kernel->machine->tlb[whichTLBPage].valid;

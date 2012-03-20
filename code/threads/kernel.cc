@@ -18,6 +18,10 @@
 #include "synchdisk.h"
 #include "post.h"
 
+
+//new
+whichTLBPage = 0;
+
 //----------------------------------------------------------------------
 // Kernel::Kernel
 //      Interpret command line arguments in order to determine flags 
