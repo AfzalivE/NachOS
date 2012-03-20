@@ -83,7 +83,7 @@ AddrSpace::~AddrSpace()
 
 IptEntry::IptEntry()
 {
-IptEntry *ipt
+IptEntry *ipt;
 ipt = new IptEntry[NumPhysPages];
 	for (i = 0; i < NumPhysPages; i++)
 	{
@@ -248,14 +248,13 @@ void AddrSpace::RestoreState()
 {
     //kernel->machine->pageTable = pageTable;
     kernel->machine->pageTableSize = numPages;
-    if(kernel->currentThread->space != oldThread->space)
-	{
-	ipt[i].vPage = tlb[whichTLBPage].virtualPage;
-	ipt[i].pPage = tlb[whichTLBPage].physicalPage;
-	ipt[i].valid = tlb[whichTLBPage].valid;
-	ipt[i].use = tlb[whichTLBPage].use;
-	ipt[i].dirty = tlb[whichTLBPage].dirty;
-	ipt[i].replacing = tlb[whichTLBPage].readOnly;
-	tlb[i].valid = FALSE;
+    if(kernel->currentThread->space != oldThread->space) {
+    	ipt[i].vPage = tlb[whichTLBPage].virtualPage;
+    	ipt[i].pPage = tlb[whichTLBPage].physicalPage;
+    	ipt[i].valid = tlb[whichTLBPage].valid;
+    	ipt[i].use = tlb[whichTLBPage].use;
+    	ipt[i].dirty = tlb[whichTLBPage].dirty;
+    	ipt[i].replacing = tlb[whichTLBPage].readOnly;
+    	tlb[i].valid = FALSE;
 	}
 }
