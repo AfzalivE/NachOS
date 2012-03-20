@@ -19,7 +19,7 @@
 #include "post.h"
 
    //new
-int whichTLBPage = 0;
+whichTLBPage = 0;
 
 //----------------------------------------------------------------------
 // Kernel::Kernel

@@ -58,6 +58,7 @@ class Kernel {
     PostOfficeOutput *postOfficeOut;
     //
     IptEntry *ipt;
+    int *whichTLBPage;
 
     int hostName;              // machine identifier
 
