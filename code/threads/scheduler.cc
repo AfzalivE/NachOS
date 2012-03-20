@@ -22,7 +22,8 @@
 #include "debug.h"
 #include "scheduler.h"
 #include "main.h"
-
+//
+Thread *oldThread = kernel->currentThread;
 //----------------------------------------------------------------------
 // Scheduler::Scheduler
 //      Initialize the list of ready but not running threads.

@@ -65,6 +65,27 @@ ExceptionHandler(ExceptionType which)
                     break;
             }
             break;
+	    //
+	case PageFaultException:
+		int virtAddr = kernel->machine->ReadRegister(39);
+		unsigned int vpn = (unsigned) virtAddr/PageSize;
+		for(int i=0; i<NumPhyPages; i++)
+		{
+		if(ipt[i]->vPage == vpn && ipt[i]->Process_Id == kernel->currentThread->space)
+		{
+		IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff); //interrupt disable
+		tlb[whichTLBPage].virtualPage = ipt[i].vPage;
+		tlb[whichTLBPage].physicalPage = ipt[i].pPage;
+		tlb[whichTLBPage].valid = TRUE;
+		tlb[whichTLBPage].use = FALSE;
+		tlb[whichTLBPage].dirty = FALSE;
+		tlb[whichTLBPage].readOnly = FALSE;
+		whichTLBPage = (whichTLBPage + 1)%TLBSize;
+		(void) kernel->interrupt->SetLevel(oldlevel); //interrupt enable
+		}
+		}
+		
+	break;
         default:
             cerr << "Unexpected user mode exception" << (int)which << "\n";
             break;

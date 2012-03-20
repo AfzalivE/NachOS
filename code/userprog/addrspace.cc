@@ -65,7 +65,11 @@ AddrSpace::AddrSpace()
     
     // zero out the entire address space
     bzero(kernel->machine->mainMemory, MemorySize);
+    
 }
+
+//----------------------------------------------------------------------
+
 
 //----------------------------------------------------------------------
 // AddrSpace::~AddrSpace
@@ -76,6 +80,22 @@ AddrSpace::~AddrSpace()
 {
    delete pageTable;
 }
+
+IptEntry::IptEntry()
+{
+IptEntry *ipt
+ipt = new IptEntry[NumPhysPages];
+	for (i = 0; i < NumPhysPages; i++)
+	{
+	ipt[i].valid = FALSE;
+	}
+}
+
+IptEntry::~IptEntry()
+{
+delete ipt;
+}
+
 
 
 //----------------------------------------------------------------------
@@ -226,6 +246,16 @@ void AddrSpace::SaveState()
 
 void AddrSpace::RestoreState() 
 {
-    kernel->machine->pageTable = pageTable;
+    //kernel->machine->pageTable = pageTable;
     kernel->machine->pageTableSize = numPages;
+    if(kernel->currentThread->space != oldThread->space)
+	{
+	ipt[i].vPage = tlb[whichTLBPage].virtualPage;
+	ipt[i].pPage = tlb[whichTLBPage].physicalPage;
+	ipt[i].valid = tlb[whichTLBPage].valid;
+	ipt[i].use = tlb[whichTLBPage].use;
+	ipt[i].dirty = tlb[whichTLBPage].dirty;
+	ipt[i].replacing = tlb[whichTLBPage].readOnly;
+	tlb[i].valid = FALSE;
+	}
 }

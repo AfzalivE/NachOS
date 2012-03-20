@@ -32,17 +32,33 @@ class AddrSpace {
                                         // been loaded
 
     void SaveState();                   // Save/restore address space-specific
-    void RestoreState();                // info on a context switch 
+    void RestoreState();                // info on a context switch
+    //
+    unsigned int numPages;              // Number of pages in the virtual 
+                                        // address space
 
   private:
     TranslationEntry *pageTable;        // Assume linear page table translation
                                         // for now!
-    unsigned int numPages;              // Number of pages in the virtual 
+//  unsigned int numPages;              // Number of pages in the virtual 
                                         // address space
 
     void InitRegisters();               // Initialize user-level CPU registers,
                                         // before jumping to user code
 
+};
+
+class IptEntry {
+public:
+IptEntry();
+~IptEntry();
+int vPage;
+int pPage;
+bool valid;
+bool dirty;
+AddrSpace *Process_Id;
+bool use;
+bool replacing;
 };
 
 #endif // ADDRSPACE_H

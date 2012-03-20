@@ -18,6 +18,9 @@
 #include "synchdisk.h"
 #include "post.h"
 
+   //new
+int whichTLBPage = 0;
+
 //----------------------------------------------------------------------
 // Kernel::Kernel
 //      Interpret command line arguments in order to determine flags 
@@ -113,6 +116,8 @@ Kernel::Initialize()
 #endif // FILESYS_STUB
     postOfficeIn = new PostOfficeInput(10);
     postOfficeOut = new PostOfficeOutput(reliability);
+    //
+    ipt = new IptEntry[NumPhysPages];
 
     interrupt->Enable();
 }
