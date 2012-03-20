@@ -70,7 +70,7 @@ ExceptionHandler(ExceptionType which)
 		int virtAddr = kernel->machine->ReadRegister(39);
 		unsigned int vpn = (unsigned) virtAddr/PageSize;
 		for(int i=0; i < NumPhysPages; i++) 		{
-		if(ipt[i].vPage == vpn && ipt[i].Process_Id == kernel->currentThread->space)
+		if(kernel->ipt[i].vPage == vpn && kernel->ipt[i].Process_Id == kernel->currentThread->space)
 		{
 		IntStatus oldlevel = kernel->interrupt->SetLevel(IntOff); //interrupt disable
 		kernel->machine->tlb[kernel->whichTLBPage].virtualPage = ipt[i].vPage;
