@@ -26,8 +26,6 @@
 
 Kernel::Kernel(int argc, char **argv)
 {
-    //new
-    whichTLBPage = 0;
     randomSlice = FALSE; 
     debugUserProg = FALSE;
     consoleIn = NULL;          // default is stdin
