@@ -32,7 +32,7 @@ class FileTable
                 bool newOut();
 
         private:
-                entry * files[MAX_FILES];
+                entry* files[MAX_FILES];
                 Lock * l;
                 bool redirIn, redirOut;
                 int count;//used to generate ids.

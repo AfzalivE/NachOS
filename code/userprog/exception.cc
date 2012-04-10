@@ -100,21 +100,6 @@ ExceptionHandler(ExceptionType which)
                         pcUp();
                         break;
 
-                case SC_Dup:
-                        id = kernel->machine->ReadRegister(4);
-                        name = ftable->getName(id);
-                        if (name != NULL) {
-                                temp = new entry;
-                                temp->f = fileSystem->Open(name);
-                                temp->mutex = ftable->findEntry(id)->mutex;
-                                temp->name = name;
-                                id = ftable->append(temp);
-                                kernel->currentThread->appendFile(id);
-                                machine->WriteRegister(2,id);
-                        }
-                        pcUp();
-                        break;
-
                 case SC_Read:
                         int num;
                         va = kernel->machine->ReadRegister(4);
@@ -170,15 +155,15 @@ ExceptionHandler(ExceptionType which)
 
 
 
-                        if (id == ConsoleOutput) //console input
-                        {
-                                w->Acquire();
-                                if(size>1) SyCn->WriteLine(buff,size);
-                                else SyCn->WriteChar(buff[0]);
-                                w->Release();
-                        }
-                        else
-                        {
+                        // if (id == ConsoleOutput) //console input
+                        // {
+                        //         w->Acquire();
+                        //         if(size>1) SyCn->WriteLine(buff,size);
+                        //         else SyCn->WriteChar(buff[0]);
+                        //         w->Release();
+                        // }
+                        // else
+                        // {
                                 if(kernel->currentThread->findFile(id))
                                         F = ftable->find(id);
                                 else
@@ -187,7 +172,7 @@ ExceptionHandler(ExceptionType which)
                                         //ftable->getLock(id);
                                         F->Write(buff,size);
                                 ftable->releaseLock(id);
-                        }
+                        // }
                         pcUp();
                         break;
 

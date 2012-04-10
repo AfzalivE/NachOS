@@ -115,6 +115,10 @@ class Thread {
     void Print() { cout << name; }
     void SelfTest();                    // test whether thread impl is 
                                         // working
+    void appendFile(int id);
+    void copyFiles(Thread *t);
+    void closeFile(int id);
+    void findFile(int id);
 
   private:
     // some of the private data for this class is listed above
