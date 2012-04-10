@@ -24,6 +24,7 @@
 #include "copyright.h"
 #include "main.h"
 #include "syscall.h"
+#include "filetable.h"
 
 // A3
 void pcUp()
@@ -81,8 +82,8 @@ ExceptionHandler(ExceptionType which)
                         bool res;
                         va = kernel->machine->ReadRegister(4);
                         kernel->machine->Translate(va,&sec, 1, false);
-                        name = kernel->&machine->mainMemory[sec];
-                        res = fileSystem->Create(name,64);
+                        name = &kernel->machine->mainMemory[sec];
+                        res = FileSystem->Create(name,64);
                         kernel->machine->WriteRegister(2,(int)res);
                         pcUp();
                         break;
@@ -92,7 +93,7 @@ ExceptionHandler(ExceptionType which)
                         kernel->machine->Translate(va,&sec, 1, false);
                         name = &kernel->machine->mainMemory[sec];
                         OpenFile *F = FileSystem->Open(name);
-                        id = ftable->append(name,F);
+                        id = FileTable->append(name,F);
                         kernel->currentThread->appendFile(id);
                         kernel->machine->WriteRegister(2,id);
                         pcUp();
