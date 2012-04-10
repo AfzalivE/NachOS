@@ -64,7 +64,7 @@ void
 ExceptionHandler(ExceptionType which)
 {
     int type = kernel->machine->ReadRegister(2);
-
+    int sec;
     switch (which) {
         case SyscallException:
         	int va;
@@ -72,6 +72,7 @@ ExceptionHandler(ExceptionType which)
         	int id;
         	char buff;
         	int size;
+        	OpenFile *F;
 
             switch(type) {
                 case SC_Halt:
@@ -81,8 +82,8 @@ ExceptionHandler(ExceptionType which)
                 		case SC_Create:
                         bool res;
                         va = kernel->machine->ReadRegister(4);
-                        kernel->machine->Translate(va,&sec, 1, false);
-                        name = &kernel->machine->mainMemory[sec];
+                        kernel->machine->Translate(va, &sec, 1, false);
+                        name = &machine->mainMemory[sec];
                         res = FileSystem->Create(name,64);
                         kernel->machine->WriteRegister(2,(int)res);
                         pcUp();
@@ -91,8 +92,8 @@ ExceptionHandler(ExceptionType which)
                 case SC_Open:
                         va = kernel->machine->ReadRegister(4);
                         kernel->machine->Translate(va,&sec, 1, false);
-                        name = &kernel->machine->mainMemory[sec];
-                        OpenFile *F = FileSystem->Open(name);
+                        name = &machine->mainMemory[sec];
+                        *F = FileSystem->Open(name);
                         id = FileTable->append(name,F);
                         kernel->currentThread->appendFile(id);
                         kernel->machine->WriteRegister(2,id);
@@ -108,7 +109,7 @@ ExceptionHandler(ExceptionType which)
                                 temp->mutex = ftable->findEntry(id)->mutex;
                                 temp->name = name;
                                 id = ftable->append(temp);
-                                currentThread->appendFile(id);
+                                kernel->currentThread->appendFile(id);
                                 machine->WriteRegister(2,id);
                         }
                         pcUp();
