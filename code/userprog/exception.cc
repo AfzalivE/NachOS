@@ -66,6 +66,12 @@ ExceptionHandler(ExceptionType which)
 
     switch (which) {
         case SyscallException:
+        	int va;
+        	char name;
+        	int id;
+        	char buff;
+        	int size;
+
             switch(type) {
                 case SC_Halt:
                     DEBUG(dbgAddr, "Shutdown, initiated by user program.\n");
@@ -73,28 +79,28 @@ ExceptionHandler(ExceptionType which)
                     break;
                 		case SC_Create:
                         bool res;
-                        int va = kernel->machine->ReadRegister(4);
+                        va = kernel->machine->ReadRegister(4);
                         kernel->machine->Translate(va,&sec, 1, false);
-                        char name=&machine->mainMemory[sec];
-                        int res = fileSystem->Create(name,64);
+                        name = kernel->&machine->mainMemory[sec];
+                        res = fileSystem->Create(name,64);
                         kernel->machine->WriteRegister(2,(int)res);
                         pcUp();
                         break;
 // A3                        	
                 case SC_Open:
-                        int va = kernel->machine->ReadRegister(4);
+                        va = kernel->machine->ReadRegister(4);
                         kernel->machine->Translate(va,&sec, 1, false);
-                        char name = &kernel->machine->mainMemory[sec];
+                        name = &kernel->machine->mainMemory[sec];
                         OpenFile *F = FileSystem->Open(name);
-                        int id = ftable->append(name,F);
+                        id = ftable->append(name,F);
                         kernel->currentThread->appendFile(id);
                         kernel->machine->WriteRegister(2,id);
                         pcUp();
                         break;
 
                 case SC_Dup:
-                        int id = kernel->machine->ReadRegister(4);
-                        char name = ftable->getName(id);
+                        id = kernel->machine->ReadRegister(4);
+                        name = ftable->getName(id);
                         if (name != NULL) {
                                 temp = new entry;
                                 temp->f = fileSystem->Open(name);
@@ -109,11 +115,11 @@ ExceptionHandler(ExceptionType which)
 
                 case SC_Read:
                         int num;
-                        int va = kernel->machine->ReadRegister(4);
+                        va = kernel->machine->ReadRegister(4);
                         kernel->machine->Translate(va,&sec, 1, false);
-                        char buff = &machine->mainMemory[sec];
-                        int size = machine->ReadRegister(5);
-                        int id = machine->ReadRegister(6);
+                        buff = &machine->mainMemory[sec];
+                        size = machine->ReadRegister(5);
+                        id = machine->ReadRegister(6);
                         if (id == ConsoleInput) //console output 
                         {
                                 r->Acquire();
@@ -142,11 +148,11 @@ ExceptionHandler(ExceptionType which)
                         break;
 
                 case SC_Write:
-                        int va = machine->ReadRegister(4);
+                        va = machine->ReadRegister(4);
                         machine->Translate(va,&sec, 1, false);
-                        char buff = &kernel->machine->mainMemory[sec];
-                        int size = kernel->machine->ReadRegister(5);
-                        int id = kernel->machine->ReadRegister(6);
+                        buff = &kernel->machine->mainMemory[sec];
+                        size = kernel->machine->ReadRegister(5);
+                        id = kernel->machine->ReadRegister(6);
                         // code = currentThread->ID;
 
                         /*fout.open("old.txt");
