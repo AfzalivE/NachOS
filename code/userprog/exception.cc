@@ -28,12 +28,12 @@
 // A3
 void pcUp()
 {
-        int pc=machine->ReadRegister(PCReg);
-        machine->WriteRegister(PrevPCReg,pc);
-        pc=machine->ReadRegister(NextPCReg);
-        machine->WriteRegister(PCReg,pc);
+        int pc = kernel->machine->ReadRegister(PCReg);
+        kernel->machine->WriteRegister(PrevPCReg,pc);
+        pc = kernel->machine->ReadRegister(NextPCReg);
+        kernel->machine->WriteRegister(PCReg,pc);
         pc+=4;
-        machine->WriteRegister(NextPCReg,pc);
+        kernel->machine->WriteRegister(NextPCReg,pc);
 }
 
 //----------------------------------------------------------------------
@@ -73,30 +73,29 @@ ExceptionHandler(ExceptionType which)
                     break;
                 		case SC_Create:
                         bool res;
-                        va= machine->ReadRegister(4);
-                        machine->Translate(va,&sec, 1, false);
-                        name=&machine->mainMemory[sec];
-                        res=fileSystem->Create(name,64);
-                        machine->WriteRegister(2,(int)res);
+                        int va = kernel->machine->ReadRegister(4);
+                        kernel->machine->Translate(va,&sec, 1, false);
+                        char name=&machine->mainMemory[sec];
+                        int res = fileSystem->Create(name,64);
+                        kernel->machine->WriteRegister(2,(int)res);
                         pcUp();
                         break;
 // A3                        	
                 case SC_Open:
-                        va = machine->ReadRegister(4);
-                        machine->Translate(va,&sec, 1, false);
-                        name = &machine->mainMemory[sec];
-                        F = fileSystem->Open(name);
-                        id = ftable->append(name,F);
-                        currentThread->appendFile(id);
-                        machine->WriteRegister(2,id);
+                        int va = kernel->machine->ReadRegister(4);
+                        kernel->machine->Translate(va,&sec, 1, false);
+                        char name = &kernel->machine->mainMemory[sec];
+                        OpenFile *F = FileSystem->Open(name);
+                        int id = ftable->append(name,F);
+                        kernel->currentThread->appendFile(id);
+                        kernel->machine->WriteRegister(2,id);
                         pcUp();
                         break;
 
                 case SC_Dup:
-                        id = machine->ReadRegister(4);
-                        name = ftable->getName(id);
-                        if(name != NULL)
-                        {
+                        int id = kernel->machine->ReadRegister(4);
+                        char name = ftable->getName(id);
+                        if (name != NULL) {
                                 temp = new entry;
                                 temp->f = fileSystem->Open(name);
                                 temp->mutex = ftable->findEntry(id)->mutex;
@@ -110,20 +109,18 @@ ExceptionHandler(ExceptionType which)
 
                 case SC_Read:
                         int num;
-                        va = machine->ReadRegister(4);
-                        machine->Translate(va,&sec, 1, false);
-                        buff = &machine->mainMemory[sec];
-                        size = machine->ReadRegister(5);
-                        id = machine->ReadRegister(6);
-                        if (id == ConsoleInput) //console output
+                        int va = kernel->machine->ReadRegister(4);
+                        kernel->machine->Translate(va,&sec, 1, false);
+                        char buff = &machine->mainMemory[sec];
+                        int size = machine->ReadRegister(5);
+                        int id = machine->ReadRegister(6);
+                        if (id == ConsoleInput) //console output 
                         {
                                 r->Acquire();
                                 num = 1;
                                 *buff = SyCn->ReadChar();
                                 r->Release();
-                        }
-                        else
-                        {
+                        } else {
                                 if(currentThread->findFile(id))
                                         F = ftable->find(id);
                                 else
@@ -145,12 +142,12 @@ ExceptionHandler(ExceptionType which)
                         break;
 
                 case SC_Write:
-                        va = machine->ReadRegister(4);
+                        int va = machine->ReadRegister(4);
                         machine->Translate(va,&sec, 1, false);
-                        buff = &machine->mainMemory[sec];
-                        size = machine->ReadRegister(5);
-                        id = machine->ReadRegister(6);
-                        code = currentThread->ID;
+                        char buff = &kernel->machine->mainMemory[sec];
+                        int size = kernel->machine->ReadRegister(5);
+                        int id = kernel->machine->ReadRegister(6);
+                        // code = currentThread->ID;
 
                         /*fout.open("old.txt");
                         int nume;
@@ -174,7 +171,7 @@ ExceptionHandler(ExceptionType which)
                         }
                         else
                         {
-                                if(currentThread->findFile(id))
+                                if(kernel->currentThread->findFile(id))
                                         F = ftable->find(id);
                                 else
                                         F=NULL;
@@ -188,8 +185,8 @@ ExceptionHandler(ExceptionType which)
 
                 case SC_Close:
                         cout<<"closing"<<endl;
-                        id = machine->ReadRegister(4);
-                        currentThread->closeFile(id);
+                        int id = machine->ReadRegister(4);
+                        kernel->currentThread->closeFile(id);
                         ftable->remove(id);
                         pcUp();
                         break;
