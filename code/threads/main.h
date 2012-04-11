@@ -11,7 +11,9 @@
 #include "copyright.h"
 #include "debug.h"
 #include "kernel.h"
+#include "filetable.h"
 
+extern FileTable *ftable;
 extern Kernel *kernel;
 extern Debug *debug;
 

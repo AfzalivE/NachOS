@@ -483,7 +483,7 @@ Thread::copyFiles(Thread * t)
        for (i = 0; i < t->fileCount; i++)
        {
                files[i] = t->files[i];
-               kernel->ftable->upCount(files[i]);
+               ftable->upCount(files[i]);
        }
        fileCount = t->fileCount;
        while (i < MAX_FILES) {files[i] = -1; i++;}

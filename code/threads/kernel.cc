@@ -10,16 +10,13 @@
 #include "main.h"
 #include "kernel.h"
 #include "sysdep.h"
-//#include "synch.h"
+#include "synch.h"
 #include "synchlist.h"
 #include "libtest.h"
 #include "string.h"
 #include "synchconsole.h"
 #include "synchdisk.h"
 #include "post.h"
-#include "filetable.h"
-
-FileTable *ftable;
 
 //----------------------------------------------------------------------
 // Kernel::Kernel
