@@ -53,6 +53,7 @@
 
 #define MachineStateSize 75 
 
+#define MAX_FILES 50
 
 // Size of the thread's private execution stack.
 // WATCH OUT IF THIS ISN'T BIG ENOUGH!!!!!
@@ -115,6 +116,12 @@ class Thread {
     void Print() { cout << name; }
     void SelfTest();                    // test whether thread impl is 
                                         // working
+    void appendFile(int id);
+    void copyFiles(Thread *t);
+    void closeFile(int id);
+    bool findFile(int id);
+    int files[MAX_FILES];
+    int fileCount;
 
   private:
     // some of the private data for this class is listed above

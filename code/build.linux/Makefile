@@ -230,13 +230,15 @@ USERPROG_H = ../userprog/addrspace.h\
 	../userprog/syscall.h\
 	../userprog/synchconsole.h\
 	../userprog/noff.h \
-	../userprog/errno.h
+	../userprog/errno.h \
+	../filesys/filetable.h
 
 USERPROG_C = ../userprog/addrspace.cc\
 	../userprog/exception.cc\
-	../userprog/synchconsole.cc
+	../userprog/synchconsole.cc\
+	../filesys/filetable.cc
 
-USERPROG_O = addrspace.o exception.o synchconsole.o
+USERPROG_O = addrspace.o exception.o synchconsole.o filetable.o
 
 FILESYS_H =../filesys/directory.h \
 	../filesys/filehdr.h\
@@ -250,9 +252,9 @@ FILESYS_C =../filesys/directory.cc\
 	../filesys/filesys.cc\
 	../filesys/pbitmap.cc\
 	../filesys/openfile.cc\
-	../filesys/synchdisk.cc\
+	../filesys/synchdisk.cc
 
-FILESYS_O =directory.o filehdr.o filesys.o pbitmap.o openfile.o synchdisk.o
+FILESYS_O =directory.o filehdr.o filesys.o pbitmap.o openfile.o synchdisk.o 
 
 NETWORK_H = ../network/post.h
 

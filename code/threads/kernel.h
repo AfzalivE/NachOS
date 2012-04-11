@@ -53,7 +53,7 @@ class Kernel {
     SynchConsoleInput *synchConsoleIn;
     SynchConsoleOutput *synchConsoleOut;
     SynchDisk *synchDisk;
-    FileSystem *fileSystem;     
+    FileSystem *fileSystem;
     PostOfficeInput *postOfficeIn;
     PostOfficeOutput *postOfficeOut;
     //

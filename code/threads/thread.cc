@@ -21,6 +21,7 @@
 #include "switch.h"
 #include "synch.h"
 #include "sysdep.h"
+#include "filetable.h"
 
 // this is put at the top of the execution stack, for detecting stack overflows
 const int STACK_FENCEPOST = 0xdedbeef;
@@ -467,4 +468,45 @@ void Thread::Join() {
         kernel->currentThread->Sleep(false);
         kernel->interrupt->SetLevel(oldLevel);
     }
+}
+
+void
+Thread::appendFile(int id)
+{
+       files[fileCount] = id;
+       fileCount++;
+}
+
+// void
+// Thread::copyFiles(Thread * t)
+// {
+//        int i;
+//        for (i = 0; i < t->fileCount; i++)
+//        {
+//                files[i] = t->files[i];
+//                ftable->upCount(files[i]);
+//        }
+//        fileCount = t->fileCount;
+//        while (i < MAX_FILES) {files[i] = -1; i++;}
+// }
+
+void
+Thread::closeFile(int id)
+{
+       fileCount--;
+       for (int i = id; i < fileCount; i++)
+               files[i] = files[i+1];
+       files[fileCount] = -1;
+}
+
+bool
+Thread::findFile(int id)
+{
+       int i;
+       for(i=0;i<fileCount;i++)
+       {
+               if(files[i]==id)return true;
+       }
+
+       return false;
 }
