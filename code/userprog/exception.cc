@@ -83,8 +83,8 @@ ExceptionHandler(ExceptionType which)
                         bool res;
                         va = kernel->machine->ReadRegister(4);
                         kernel->machine->Translate(va, &sec, 1, false);
-                        name = &machine->mainMemory[sec];
-                        res = FileSystem->Create(name,64);
+                        name = &kernel->machine->mainMemory[sec];
+                        res = kernel->FileSystem->Create(name,64);
                         kernel->machine->WriteRegister(2,(int)res);
                         pcUp();
                         break;
@@ -93,8 +93,8 @@ ExceptionHandler(ExceptionType which)
                         va = kernel->machine->ReadRegister(4);
                         kernel->machine->Translate(va, &sec, 1, false);
                         name = &machine->mainMemory[sec];
-                        *F = FileSystem->Open(name);
-                        id = ftable->append(name,F);
+                        *F = kernel->FileSystem->Open(name);
+                        id = FileTable->ftable->append(name,F);
                         kernel->currentThread->appendFile(id);
                         kernel->machine->WriteRegister(2,id);
                         pcUp();
@@ -103,7 +103,7 @@ ExceptionHandler(ExceptionType which)
                 case SC_Read:
                         int num;
                         va = kernel->machine->ReadRegister(4);
-                        kernel->machine->Translate(va,&sec, 1, false);
+                        kernel->machine->Translate(va, &sec, 1, false);
                         buff = &machine->mainMemory[sec];
                         size = machine->ReadRegister(5);
                         id = machine->ReadRegister(6);

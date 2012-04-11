@@ -142,6 +142,14 @@ class Machine {
                                    // Read or write 1, 2, or 4 bytes of virtual 
                                    // memory (at addr).  Return FALSE if a 
                                    // correct translation couldn't be found.
+
+    ExceptionType Translate(int virtAddr, int* physAddr, int size,bool writing);
+                                   // Translate an address, and check for 
+                                   // alignment.  Set the use and dirty bits in 
+                                   // the translation entry appropriately,
+                                   // and return an exception code if the 
+                                   // translation couldn't be completed.
+
   private:
 
 // Routines internal to the machine simulation -- DO NOT call these directly
@@ -153,12 +161,6 @@ class Machine {
     
 
 
-    ExceptionType Translate(int virtAddr, int* physAddr, int size,bool writing);
-                                   // Translate an address, and check for 
-                                   // alignment.  Set the use and dirty bits in 
-                                   // the translation entry appropriately,
-                                   // and return an exception code if the 
-                                   // translation couldn't be completed.
 
     void RaiseException(ExceptionType which, int badVAddr);
                                    // Trap to the Nachos kernel, because of a
