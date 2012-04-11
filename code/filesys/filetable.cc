@@ -1,7 +1,5 @@
 #include "FileTable.h"
 
-FileTable *ftable;
-
 FileTable::FileTable()
 {
         for (int i = 0; i < MAX_FILES; i++) files[i] = NULL;
