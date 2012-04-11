@@ -30,6 +30,7 @@ class FileTable
                 void upCount(int id);
                 bool newIn();
                 bool newOut();
+                FileTable *ftable;
 
         private:
                 entry* files[MAX_FILES];
