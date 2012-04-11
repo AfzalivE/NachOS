@@ -27,7 +27,7 @@ class FileTable
                 int append(char* name2, OpenFile* f2);
                 void acquireLock(int id);
                 void releaseLock(int id);
-                void upCount(int id);
+                int upCount(int id);
                 bool newIn();
                 bool newOut();
 

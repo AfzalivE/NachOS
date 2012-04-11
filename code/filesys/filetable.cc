@@ -116,9 +116,9 @@ int FileTable::append(char* name2, OpenFile* f2)
         return temp->id;
 }
 
-void FileTable::upCount(int id)
+int FileTable::upCount(int id)
 {
-        files[id]->OpCount++;
+        return files[id]->OpCount++;
 }
 
 void FileTable::acquireLock(int id) {files[id]->mutex->Acquire();}
