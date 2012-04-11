@@ -40,6 +40,7 @@
 #include "copyright.h"
 #include "utility.h"
 #include "sysdep.h"
+#include "filetable.h"
 
 #include "machine.h"
 #include "addrspace.h"
@@ -108,6 +109,7 @@ class Thread {
     bool joinAllow;                     // bool to determine if the join should be allowed // Q4_CHANGE
     
     Thread *joinFrom;                   // Parent thread // Q4_CHANGE
+    FileTable *ftable;
 
     void CheckOverflow();               // Check if thread stack has 
                                         // overflowed

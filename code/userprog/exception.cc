@@ -78,7 +78,7 @@ ExceptionHandler(ExceptionType which)
                     DEBUG(dbgAddr, "Shutdown, initiated by user program.\n");
                     kernel->interrupt->Halt();
                     break;
-                		case SC_Create:
+		case SC_Create:
                         bool res;
                         va = kernel->machine->ReadRegister(4);
                         kernel->machine->Translate(va, &sec, 1, false);
@@ -87,17 +87,17 @@ ExceptionHandler(ExceptionType which)
                         kernel->machine->WriteRegister(2,(int)res);
                         pcUp();
                         break;
-// A3                        	
-                // case SC_Open:
-                //         va = kernel->machine->ReadRegister(4);
-                //         kernel->machine->Translate(va, &sec, 1, false);
-                //         name = &machine->mainMemory[sec];
-                //         *F = FileSystem->Open(name);
-                //         id = ftable->append(name,F);
-                //         kernel->currentThread->appendFile(id);
-                //         kernel->machine->WriteRegister(2,id);
-                //         pcUp();
-                //         break;
+        // A3                        	
+                case SC_Open:
+                        va = kernel->machine->ReadRegister(4);
+                        kernel->machine->Translate(va, &sec, 1, false);
+                        name = &machine->mainMemory[sec];
+                        *F = FileSystem->Open(name);
+                        id = ftable->append(name,F);
+                        kernel->currentThread->appendFile(id);
+                        kernel->machine->WriteRegister(2,id);
+                        pcUp();
+                        break;
 
                 case SC_Read:
                         int num;

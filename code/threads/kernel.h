@@ -18,7 +18,6 @@
 #include "alarm.h"
 #include "filesys.h"
 #include "machine.h"
-// #include "filetable.h"
 
 class PostOfficeInput;
 class PostOfficeOutput;
@@ -55,7 +54,6 @@ class Kernel {
     SynchConsoleOutput *synchConsoleOut;
     SynchDisk *synchDisk;
     FileSystem *fileSystem;
-    // FileTable *ftable; 
     PostOfficeInput *postOfficeIn;
     PostOfficeOutput *postOfficeOut;
     //
