@@ -5,6 +5,8 @@
 #include "syscall.h"
 #include "synch.h"
 
+extern FileTable *ftable;
+
 struct entry {
         int id;
         char* name;
@@ -30,7 +32,6 @@ class FileTable
                 void upCount(int id);
                 bool newIn();
                 bool newOut();
-                FileTable *ftable;
 
         private:
                 entry* files[MAX_FILES];
