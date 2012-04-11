@@ -109,10 +109,10 @@ Kernel::Initialize()
     synchDisk = new SynchDisk();        //
 #ifdef FILESYS_STUB
     fileSystem = new FileSystem();
-    ftable = new FileTable();
+    // ftable = new FileTable();
 #else
     fileSystem = new FileSystem(formatFlag);
-    ftable = new FileTable(formatFlag);
+    // ftable = new FileTable(formatFlag);
 #endif // FILESYS_STUB
     postOfficeIn = new PostOfficeInput(10);
     postOfficeOut = new PostOfficeOutput(reliability);
