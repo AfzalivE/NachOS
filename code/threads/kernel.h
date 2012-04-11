@@ -21,7 +21,6 @@
 #include "filetable.h"
 
 
-FileTable *ftable;
 class PostOfficeInput;
 class PostOfficeOutput;
 class SynchConsoleInput;
@@ -59,6 +58,7 @@ class Kernel {
     FileSystem *fileSystem;     
     PostOfficeInput *postOfficeIn;
     PostOfficeOutput *postOfficeOut;
+    FileTable *ftable;
     //
     IptEntry *ipt;
     int whichTLBPage;
