@@ -243,7 +243,7 @@ FILESYS_H =../filesys/directory.h \
 	../filesys/filesys.h \
 	../filesys/openfile.h\
 	../filesys/pbitmap.h\
-	../filesys/synchdisk.h
+	../filesys/synchdisk.h \
 	../filesys/filetable.h
 
 FILESYS_C =../filesys/directory.cc\
