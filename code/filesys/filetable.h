@@ -3,7 +3,7 @@
 
 #include "openfile.h"
 #include "syscall.h"
-#include "synch.h"
+// #include "synch.h"
 
 struct entry {
         int id;
