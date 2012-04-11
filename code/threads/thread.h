@@ -119,8 +119,9 @@ class Thread {
     void appendFile(int id);
     void copyFiles(Thread *t);
     void closeFile(int id);
-    void findFile(int id);
+    bool findFile(int id);
     int files[MAX_FILES];
+    int fileCount;
 
   private:
     // some of the private data for this class is listed above
