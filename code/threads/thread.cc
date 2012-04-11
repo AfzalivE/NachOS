@@ -477,18 +477,18 @@ Thread::appendFile(int id)
        fileCount++;
 }
 
-void
-Thread::copyFiles(Thread * t)
-{
-       int i;
-       for (i = 0; i < t->fileCount; i++)
-       {
-               files[i] = t->files[i];
-               ftable->upCount(files[i]);
-       }
-       fileCount = t->fileCount;
-       while (i < MAX_FILES) {files[i] = -1; i++;}
-}
+// void
+// Thread::copyFiles(Thread * t)
+// {
+//        int i;
+//        for (i = 0; i < t->fileCount; i++)
+//        {
+//                files[i] = t->files[i];
+//                ftable->upCount(files[i]);
+//        }
+//        fileCount = t->fileCount;
+//        while (i < MAX_FILES) {files[i] = -1; i++;}
+// }
 
 void
 Thread::closeFile(int id)
