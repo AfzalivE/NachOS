@@ -1,5 +1,5 @@
-#ifndef FILETABLE_H_
-#define FILETABLE_H_
+#ifndef FILETABLE_H
+#define FILETABLE_H
 
 #include "openfile.h"
 #include "syscall.h"
