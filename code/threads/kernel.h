@@ -18,6 +18,9 @@
 #include "alarm.h"
 #include "filesys.h"
 #include "machine.h"
+#include "filetable.h"
+
+extern FileTable *ftable;
 
 class PostOfficeInput;
 class PostOfficeOutput;
