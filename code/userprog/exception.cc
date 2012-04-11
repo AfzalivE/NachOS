@@ -83,8 +83,8 @@ ExceptionHandler(ExceptionType which)
                         bool res;
                         va = kernel->machine->ReadRegister(4);
                         kernel->machine->Translate(va, &sec, 1, false);
-                        name = &kernel->machine->mainMemory[sec];
-                        res = kernel->FileSystem->Create(name,64);
+                        name = kernel->machine->mainMemory[sec];
+                        res = kernel->fileSystem->Create(name,64);
                         kernel->machine->WriteRegister(2,(int)res);
                         pcUp();
                         break;
@@ -92,7 +92,7 @@ ExceptionHandler(ExceptionType which)
                 case SC_Open:
                         va = kernel->machine->ReadRegister(4);
                         kernel->machine->Translate(va, &sec, 1, false);
-                        name = &machine->mainMemory[sec];
+                        name = kernel->machine->mainMemory[sec];
                         *F = kernel->FileSystem->Open(name);
                         id = FileTable->ftable->append(name,F);
                         kernel->currentThread->appendFile(id);
@@ -114,14 +114,14 @@ ExceptionHandler(ExceptionType which)
                                 *buff = SyCn->ReadChar();
                                 r->Release();
                         } else {
-                                if(currentThread->findFile(id))
-                                        F = ftable->find(id);
+                                if(kernel->currentThread->findFile(id))
+                                        F = FileTable->ftable->find(id);
                                 else
                                         F=NULL;
                                 if(F!= NULL)
                                 {
                                         num = F->Read(buff,size);
-                                        ftable->releaseLock(id);
+                                        FileTable->ftable->releaseLock(id);
                                 }
                                 else
                                 {
@@ -137,7 +137,7 @@ ExceptionHandler(ExceptionType which)
                 case SC_Write:
                         va = machine->ReadRegister(4);
                         machine->Translate(va,&sec, 1, false);
-                        buff = &kernel->machine->mainMemory[sec];
+                        buff = kernel->machine->mainMemory[sec];
                         size = kernel->machine->ReadRegister(5);
                         id = kernel->machine->ReadRegister(6);
                         // code = currentThread->ID;
@@ -165,20 +165,20 @@ ExceptionHandler(ExceptionType which)
                         // else
                         // {
                                 if(kernel->currentThread->findFile(id))
-                                        F = ftable->find(id);
+                                        F = FileTable->ftable->find(id);
                                 else
                                         F=NULL;
                                 if(F!= NULL)
                                         //ftable->getLock(id);
                                         F->Write(buff,size);
-                                ftable->releaseLock(id);
+                                FileTable->ftable->releaseLock(id);
                         // }
                         pcUp();
                         break;
 
                 case SC_Close:
                         cout<<"closing"<<endl;
-                        int id = machine->ReadRegister(4);
+                        id = machine->ReadRegister(4);
                         kernel->currentThread->closeFile(id);
                         ftable->remove(id);
                         pcUp();
