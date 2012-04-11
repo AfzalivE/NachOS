@@ -18,7 +18,6 @@
 #include "alarm.h"
 #include "filesys.h"
 #include "machine.h"
-#include "filetable.h"
 
 class PostOfficeInput;
 class PostOfficeOutput;

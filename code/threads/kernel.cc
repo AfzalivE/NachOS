@@ -17,6 +17,7 @@
 #include "synchconsole.h"
 #include "synchdisk.h"
 #include "post.h"
+#include "filetable.h"
 
 //----------------------------------------------------------------------
 // Kernel::Kernel
