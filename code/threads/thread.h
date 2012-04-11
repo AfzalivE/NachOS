@@ -53,6 +53,7 @@
 
 #define MachineStateSize 75 
 
+#define MAX_FILES 50
 
 // Size of the thread's private execution stack.
 // WATCH OUT IF THIS ISN'T BIG ENOUGH!!!!!
@@ -119,6 +120,7 @@ class Thread {
     void copyFiles(Thread *t);
     void closeFile(int id);
     void findFile(int id);
+    int files[MAX_FILES];
 
   private:
     // some of the private data for this class is listed above
