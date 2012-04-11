@@ -116,7 +116,7 @@ int FileTable::append(char* name2, OpenFile* f2)
         return temp->id;
 }
 
-int FileTable::upCount(int id)
+void FileTable::upCount(int id)
 {
         return files[id]->OpCount++;
 }
