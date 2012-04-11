@@ -10,7 +10,7 @@
 #include "main.h"
 #include "kernel.h"
 #include "sysdep.h"
-#include "synch.h"
+//#include "synch.h"
 #include "synchlist.h"
 #include "libtest.h"
 #include "string.h"
