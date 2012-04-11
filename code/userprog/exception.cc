@@ -93,7 +93,7 @@ ExceptionHandler(ExceptionType which)
                         va = kernel->machine->ReadRegister(4);
                         kernel->machine->Translate(va, &sec, 1, false);
                         name = kernel->machine->mainMemory[sec];
-                        *F = kernel->FileSystem->Open(name);
+                        *F = kernel->fileSystem->Open(name);
                         id = FileTable->ftable->append(name,F);
                         kernel->currentThread->appendFile(id);
                         kernel->machine->WriteRegister(2,id);
