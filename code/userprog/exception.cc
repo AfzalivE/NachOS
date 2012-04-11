@@ -88,16 +88,16 @@ ExceptionHandler(ExceptionType which)
                         pcUp();
                         break;
 // A3                        	
-                case SC_Open:
-                        va = kernel->machine->ReadRegister(4);
-                        kernel->machine->Translate(va, &sec, 1, false);
-                        name = &machine->mainMemory[sec];
-                        *F = FileSystem->Open(name);
-                        id = ftable->append(name,F);
-                        kernel->currentThread->appendFile(id);
-                        kernel->machine->WriteRegister(2,id);
-                        pcUp();
-                        break;
+                // case SC_Open:
+                //         va = kernel->machine->ReadRegister(4);
+                //         kernel->machine->Translate(va, &sec, 1, false);
+                //         name = &machine->mainMemory[sec];
+                //         *F = FileSystem->Open(name);
+                //         id = ftable->append(name,F);
+                //         kernel->currentThread->appendFile(id);
+                //         kernel->machine->WriteRegister(2,id);
+                //         pcUp();
+                //         break;
 
                 case SC_Read:
                         int num;

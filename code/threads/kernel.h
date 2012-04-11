@@ -19,7 +19,6 @@
 #include "filesys.h"
 #include "machine.h"
 #include "filetable.h"
-#include "filesys.h"
 
 class PostOfficeInput;
 class PostOfficeOutput;
@@ -55,11 +54,10 @@ class Kernel {
     SynchConsoleInput *synchConsoleIn;
     SynchConsoleOutput *synchConsoleOut;
     SynchDisk *synchDisk;
-    FileSystem *fileSystem;     
+    FileSystem *fileSystem;    
+    FileTable *ftable; 
     PostOfficeInput *postOfficeIn;
     PostOfficeOutput *postOfficeOut;
-    // A3
-    FileTable *ftable;
     //
     IptEntry *ipt;
     int whichTLBPage;
