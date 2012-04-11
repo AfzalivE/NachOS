@@ -2,6 +2,7 @@
 
 FileTable::FileTable()
 {
+        *ftable = new FileTable();
         for (int i = 0; i < MAX_FILES; i++) files[i] = NULL;
         count = 0;
         files[count] = new entry;
