@@ -110,7 +110,7 @@ Kernel::Initialize()
     synchDisk = new SynchDisk();        //
 #ifdef FILESYS_STUB
     fileSystem = new FileSystem();
-    kernel->FileTable->ftable = new FileTable();
+    Thread->FileTable->ftable = new FileTable();
 #else
     fileSystem = new FileSystem(formatFlag);
     ftable = new FileTable();
