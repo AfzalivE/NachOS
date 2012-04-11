@@ -54,6 +54,7 @@ class Kernel {
     SynchConsoleOutput *synchConsoleOut;
     SynchDisk *synchDisk;
     FileSystem *fileSystem;    
+    #include "filetable.h"
     FileTable *ftable; 
     PostOfficeInput *postOfficeIn;
     PostOfficeOutput *postOfficeOut;
