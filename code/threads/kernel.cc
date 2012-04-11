@@ -19,6 +19,8 @@
 #include "post.h"
 #include "filetable.h"
 
+FileTable *ftable;
+
 //----------------------------------------------------------------------
 // Kernel::Kernel
 //      Interpret command line arguments in order to determine flags 
